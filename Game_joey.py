@@ -1,19 +1,53 @@
 import pygame
+from pygame.locals import *
+from sys import exit
+
+#afbeeldingen locaties aangeven
+board       = 'Main/Game/board.jpg'
+lp          = 'Button/GM/levenspunten.png'
+cp          = 'Button/GM/conditiepunten.png'
+ds          = 'Main/Dice/D0.png'
+sf          = 'Cards/SFC/SFC1.png'
+score       = 'Cards/SFC/SC1.png'
+speler      = 'Player/S1.png'
+pion1       = 'Player/Piece/Rood.png'
+
+#opstarten van pygame
 pygame.init()
-screen = pygame.display.set_mode((1280,1024))
+
+
+#grootte van het scherm aangeven
+screen = pygame.display.set_mode((800, 600))
+
+#achtergrondkleur
 screen.fill((80, 200, 250))
-background_position = [50, 50]
-pygame.display.set_caption('Survival game')
-img = pygame.image.load('Button/GM/help.png')
-img =  pygame.transform.scale(img,(40,40))
-screen.blit(img,(1000,300))
-pygame.display.flip()
 
-done=False
+#Laden van afbeelding
+spelbord = pygame.image.load(board)
 
+#Hervormen van de afbeelding
+gameboard = pygame.transform.scale(spelbord, (500, 500))
 
-while not done:
-        for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                        done = True
-                        pygame.display.update()
+#Laden van afbeelding
+levenspunt = pygame.image.load(lp)
+#Hervormen van de afbeelding
+lifepoints = pygame.transform.scale(levenspunt, (250, 40))
+
+CP= pygame.image.load(cp)
+#zolang de bovenstaande klopt
+while True:
+    #ophalen van pygame event
+    for event in pygame.event.get():
+        #anders stop de pygame
+        if event.type == QUIT:
+            #detect sluitknop
+            pygame.quit()
+            #sluit de pygame
+            exit()
+    #locaties op het spelbord
+    screen.blit(gameboard, (0,50))
+    screen.blit(lifepoints, (0,5))
+    screen.blit(gameboard, (0,50))
+
+    #Scherm vernieuwen bij verandering
+    pygame.display.update()
