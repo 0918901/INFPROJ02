@@ -1,3 +1,4 @@
+__author__ = 'quinnjansen'
 import pygame
 from pygame.locals import *
 from sys import exit
