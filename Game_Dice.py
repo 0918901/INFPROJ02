@@ -16,15 +16,15 @@ dob   = 'Button/GM/knop roll.png'
 screen_width   = 768
 screen_height  = 1024
 
-dice_width  =   100
-dice_height =   100
+dice_width  =   200
+dice_height =   200
 dice_x      =   300
-dice_y      =   100
+dice_y      =   200
 
-dob_width  =   100
-dob_height =   100
-dob_x      =   400
-dob_y      =   100
+dob_width  =   200
+dob_height =   200
+dob_x      =   500
+dob_y      =   200
 
 screen = pygame.display.set_mode((screen_height,screen_width), DOUBLEBUF, 32)
 
@@ -79,7 +79,7 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
             print ("X =",mouseX, "Y =",mouseY)
-            if mouseX >= 400 and mouseY >= 100 and mouseX <= 500 and mouseY <= 200:
+            if mouseX >= dob_x and mouseY >= dob_y and mouseX <= (dob_x+100) and mouseY <= (dob_y+100):
                 print("je hebt de roll knop gevonden")
             player1_choice = random.randint(1,6)
             if player1_choice == 0:
