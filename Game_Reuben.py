@@ -16,7 +16,7 @@ pion1       = 'Player/Piece/Rood.png'
 pygame.init()
 
 #grootte van het scherm aangeven
-screen = pygame.display.set_mode((1024, 768))
+screen = pygame.display.set_mode((1024, 768),DOUBLEBUF, 32)
 
 #Laden van afbeelding
 spelbord = pygame.image.load(board).convert()
@@ -33,6 +33,12 @@ while True:
             pygame.quit()
             #sluit de pygame
             exit()
+        if event.type == MOUSEBUTTONDOWN:
+            #detect sluitknop
+            board.quit()
+            #sluit de pygame
+            exit()
+
     #locaties op het spelbord
     screen.blit(gameboard, (0,0))
 
