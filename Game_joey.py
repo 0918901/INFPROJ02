@@ -1,8 +1,4 @@
 import pygame
-from pygame.locals import *
-from sys import exit
-
-#afbeeldingen locaties aangeven
 board       = 'Main/Game/board.png'
 lp          = 'Button/GM/levenspunten.png'
 cp          = 'Button/GM/conditiepunten.png'
@@ -17,22 +13,21 @@ roll        = 'Button/GM/knop roll.png'
 bg          = 'Main/Game/wood.jpg'
 #opstarten van pygame
 pygame.init()
-
-
-#grootte van het scherm aangeven
+screen = pygame.display.set_mode((1280,1024))
 screen = pygame.display.set_mode((1024, 768))
 #BG = pygame.image.load(bg).convert()
 #achtergrondkleur
 screen.fill((80, 200, 250))
+pygame.display.set_caption('Survival game')
+img=pygame.image.load('help.png')
+done=False
+pygame.display.flip()
 
-#Laden van afbeelding
-spelbord = pygame.image.load(board)
 
-#Hervormen van de afbeelding
-gameboard = pygame.transform.scale(spelbord, (500, 500))
-
-#Laden van afbeelding
-levenspunt = pygame.image.load(lp)
+while not done:
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                        done = True
 
 #Hervormen van de afbeelding
 lifepoints = pygame.transform.scale(levenspunt, (250, 40))
