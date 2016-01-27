@@ -1,4 +1,9 @@
 import pygame
+from pygame.locals import *
+from sys import exit
+
+#afbeeldingen locaties aangeven
+bg          = 'Main/Game/wood.jpg'
 board       = 'Main/Game/board.png'
 lp          = 'Button/GM/levenspunten.png'
 cp          = 'Button/GM/conditiepunten.png'
@@ -10,24 +15,28 @@ pion1       = 'Player/Piece/Rood.png'
 quit        = 'Button/GM/kruis.png'
 start       = 'Button/GM/help.png'
 roll        = 'Button/GM/knop roll.png'
-bg          = 'Main/Game/wood.jpg'
+knop1       = 'Button/GM/kies_1.png'
+knop2       = 'Button/GM/kies_2.png'
+knop3       = 'Button/GM/kies_3.png'
+
 #opstarten van pygame
 pygame.init()
-screen = pygame.display.set_mode((1280,1024))
+
+
+#grootte van het scherm aangeven
 screen = pygame.display.set_mode((1024, 768))
-#BG = pygame.image.load(bg).convert()
+BG = pygame.image.load(bg).convert()
 #achtergrondkleur
-screen.fill((80, 200, 250))
-pygame.display.set_caption('Survival game')
-img=pygame.image.load('help.png')
-done=False
-pygame.display.flip()
+#screen.fill((80, 200, 250))
 
+#Laden van afbeelding
+spelbord = pygame.image.load(board)
 
-while not done:
-        for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                        done = True
+#Hervormen van de afbeelding
+gameboard = pygame.transform.scale(spelbord, (500, 500))
+
+#Laden van afbeelding
+levenspunt = pygame.image.load(lp)
 
 #Hervormen van de afbeelding
 lifepoints = pygame.transform.scale(levenspunt, (250, 40))
@@ -67,6 +76,19 @@ Speler = pygame.transform.scale(Speler,(100, 100))
 red_Pion = pygame.image.load(pion1)
 red_Pion= pygame.transform.scale(red_Pion,(50, 50))
 
+#knop1
+Knop1 = pygame.image.load(knop1)
+Knop1 = pygame.transform.scale(Knop1,(60, 60))
+
+
+#knop2
+Knop2 = pygame.image.load(knop2)
+Knop2 = pygame.transform.scale(Knop2,(60, 60))
+
+#knop3
+Knop3 = pygame.image.load(knop3)
+Knop3 = pygame.transform.scale(Knop3,(60, 60))
+
 #zolang de bovenstaande klopt
 while True:
     #ophalen van pygame event
@@ -79,6 +101,7 @@ while True:
             exit()
 
     #locaties op het spelbord
+    screen.blit(BG, (0,0))
     screen.blit(lifepoints, (20,15))
     screen.blit(gameboard, (20,100))
     screen.blit(CP,(300,15))
@@ -86,10 +109,13 @@ while True:
     screen.blit(Start,(900,15))
     screen.blit(DS,(900,80))
     screen.blit(Roll,(900,200))
-    screen.blit(SF,(550,100))
-    screen.blit(Speler,(850,350))
+    screen.blit(SF,(550,20))
+    screen.blit(Speler,(850,450))
     screen.blit(red_Pion,(460,530))
-    screen.blit(Score,(550,440))
-    #screen.blit(BG, (0,0))
+    screen.blit(Score,(550,350))
+    screen.blit(Knop1,(550,650))
+    screen.blit(Knop2,(650,650))
+    screen.blit(Knop3,(750,650))
+
     #Scherm vernieuwen bij verandering
     pygame.display.update()
