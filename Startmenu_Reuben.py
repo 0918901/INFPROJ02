@@ -36,7 +36,13 @@ while True:
             exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
-            print (mouseX, mouseY)
+            print ("X =",mouseX, "Y =",mouseY)
+            if mouseX >= 200 and mouseY >= 300 and mouseX <= 800 and mouseY <= 400:
+                print("je hebt de play knop gevonden")
+            if mouseX >= 200 and mouseY >= 450 and mouseX <= 950 and mouseY <= 550:
+                print("je hebt de stop knop gevonden")
+
+
 
     screen.blit(background_image, (0, 0))
     screen.blit(play_button, (200, 300))
