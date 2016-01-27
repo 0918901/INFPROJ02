@@ -1,128 +1,126 @@
+import random
+import pygame
+from pygame.locals import *
+from sys import exit
+
+
+D0    = 'Main/Dice/D0.png'
+D1    = 'Main/Dice/D1.png'
+D2    = 'Main/Dice/D2.png'
+D3    = 'Main/Dice/D3.png'
+D4    = 'Main/Dice/D4.png'
+D5    = 'Main/Dice/D5.png'
+D6    = 'Main/Dice/D6.png'
+dob   = 'Button/GM/knop roll.png'
+
+screen_width   = 768
+screen_height  = 1024
+
+dice_width  =   100
+dice_height =   100
+dice_x      =   300
+dice_y      =   100
+
+dob_width  =   100
+dob_height =   100
+dob_x      =   400
+dob_y      =   100
+
+screen = pygame.display.set_mode((screen_height,screen_width), DOUBLEBUF, 32)
+
+dob = pygame.image.load(dob)
+dob = pygame.transform.scale(dob, (dob_width, dob_height))
+
+player1_choice = 0
+
+if player1_choice == 0:
+    D0 = pygame.image.load(D0).convert_alpha()
+    D = pygame.transform.scale(D0, (dice_width, dice_height))
+
+if player1_choice == 1:
+    D1 = pygame.image.load(D1).convert_alpha()
+    D = pygame.transform.scale(D1, (dice_width, dice_height))
+
+if player1_choice == 2:
+    D2 = pygame.image.load(D2).convert_alpha()
+    D = pygame.transform.scale(D2, (dice_width, dice_height))
+
+if player1_choice == 3:
+    D3 = pygame.image.load(D3).convert_alpha()
+    D = pygame.transform.scale(D3, (dice_width, dice_height))
+
+if player1_choice == 4:
+    D4 = pygame.image.load(D4).convert_alpha()
+    D = pygame.transform.scale(D4, (dice_width, dice_height))
+
+if player1_choice == 5:
+    D5 = pygame.image.load(D5).convert_alpha()
+    D = pygame.transform.scale(D5, (dice_width, dice_height))
+
+if player1_choice == 6:
+    D6 = pygame.image.load(D6).convert_alpha()
+    D = pygame.transform.scale(D6, (dice_width, dice_height))
+
+
 print("---------------------------------------------------------------")
 #Naam opdracht
-print("Assignment 4 Exercise 2 RPS Deel A")
+print("Dobbelsteen dobbelen")
 print("---------------------------------------------------------------")
 
-#declaratie RPS
-def RPS():
-    #Speluitleg
-    print("Player VS Player [Rock,Paper,Scisscors]")
-    print("---------------------------------------------------------------")
-    print("Game Choices")
-    print("1 = Rock")
-    print("2 = Scissors")
-    print("3 = Paper")
-    print("---------------------------------------------------------------")
+while True:
+    for event in pygame.event.get():
+        #anders stop de pygame
+        if event.type == QUIT:
+            #detect sluitknop
+            pygame.quit()
+            #sluit de pygame
+            exit()
 
-    #Player 1
-    #Zolang bovenstaande klopt wordt het onderstaande wordt uitgevoerd
-    while True:
-        #Tekst die aangeeft wie er aan de beurt is
-        print("Player 1")
-        #Invoer keuze Speler 1
-        print("choose a number:")
-        choice = input('=')
-        print("---------------------------------------------------------------")
-        #Detect Invoer keuze Rock Speler 1
-        if choice == 'r' or choice == 'R' or choice == 'Rock' or choice == 'rock' or choice == '1':
-            player1_choice = 1
-            break
-        #Detect Invoer keuze Scissors Speler 1
-        elif choice == 'S' or choice == 's' or choice == 'Scissors' or choice == 'sciccors' or choice == '2':
-            player1_choice = 2
-            break
-        #Detect Invoer keuze Paper Speler 1
-        elif choice == 'P' or choice == 'p' or choice == 'Paper' or choice == 'paper' or choice == '3':
-            player1_choice = 3
-            break
-        else:
-            #Foutmelding bij ongeldige invoer
-            print("---------------------------------------------------------------")
-            print('That\'s not possible!!')
-            #Tekst die aangeeft wat er moet gebeuren
-            print('Please try again')
-            print("---------------------------------------------------------------")
-            #Probeer nog eens
-            continue
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            (mouseX, mouseY) = pygame.mouse.get_pos()
+            print ("X =",mouseX, "Y =",mouseY)
+            if mouseX >= 400 and mouseY >= 100 and mouseX <= 500 and mouseY <= 200:
+                print("je hebt de roll knop gevonden")
+            player1_choice = random.randint(1,6)
+            if player1_choice == 0:
+                D0 = pygame.image.load(D0)
+                D = pygame.transform.scale(D0, (dice_width, dice_height))
+                print ("je hebt 0 gegooid")
 
-    #Player 2
-    #Zolang bovengenomde klopt het onderstaande wordt uitgevoerd
-    while True:
-        #uitleg keuzemenu
-        print("Game Choices")
-        print("1 = Rock")
-        print("2 = Scissors")
-        print("3 = Paper")
-        print("---------------------------------------------------------------")
-        #Tekst die aangeeft wie er aan de beurt is
-        print("Player 2")
-        #Invoer keuze Speler 2
-        print("choose a number:")
-        choice = input('=')
-        print("---------------------------------------------------------------")
-        #Detect Invoer keuze Rock Speler 2
-        if choice == 'r' or choice == 'R' or choice == 'Rock' or choice == 'rock' or choice == '1':
-            player2_choice = 1
-            break
-        #Detect Invoer keuze Scissors Speler 2
-        elif choice == 'S' or choice == 's' or choice == 'Scissors' or choice == 'sciccors' or choice == '2':
-            player2_choice = 2
-            break
-        #Detect Invoer keuze Paper Speler 2
-        elif choice == 'P' or choice == 'p' or choice == 'Paper' or choice == 'paper' or choice == '3':
-            player2_choice = 3
-            break
-        #als bovenstaande niet wordt gebruikt wordt onderstaande van toepassing
-        else:
-            #Foutmelding bij ongeldige invoer
-            print("---------------------------------------------------------------")
-            print('That\'s not possible!!')
-            #Tekst die aangeeft wat er moet gebeuren
-            print('Please try again')
-            print("---------------------------------------------------------------")
-            #Probeer nog eens
-            continue
+            elif player1_choice == 1:
+                D1 = pygame.image.load(D1)
+                D = pygame.transform.scale(D1, (dice_width, dice_height))
+                print ("je hebt 1 gegooid")
 
-    #Zolang bovengenomde klopt het onderstaande wordt uitgevoerd
-    while True:
-        #Bij gelijk spel
-        if player1_choice ==  player2_choice:
-            print('It\'s a draw!')
-            print("---------------------------------------------------------------")
+            elif player1_choice == 2:
+                D2 = pygame.image.load(D2)
+                D = pygame.transform.scale(D2, (dice_width, dice_height))
+                print ("je hebt 2 gegooid")
 
-        #Speler 1 Rock - Speler 2 Scissors
-        elif (player1_choice == 1 and  player2_choice == 2 and print("Player 1 Wins! Because Rock smashes Scissors")):
-            print("")
+            elif player1_choice == 3:
+                D3 = pygame.image.load(D3)
+                D = pygame.transform.scale(D3, (dice_width, dice_height))
+                print ("je hebt 3 gegooid")
 
-        #Speler 1 Rock - Speler 2 Paper
-        elif (player1_choice == 1 and  player2_choice == 3 and print("Player 2 Wins! Because Paper covers Rock")):
-            print("")
+            elif player1_choice == 4:
+                D4 = pygame.image.load(D4)
+                D = pygame.transform.scale(D4, (dice_width, dice_height))
+                print ("je hebt 4 gegooid")
 
-        #Speler 1 Scissors - Speler 2 Rock
-        elif (player1_choice == 2 and  player2_choice == 1 and print("Player 2 Wins! Because Rock smashes Scissors")):
-            print("")
+            elif player1_choice == 5:
+                D5 = pygame.image.load(D5)
+                D = pygame.transform.scale(D5, (dice_width, dice_height))
+                print ("je hebt 5 gegooid")
 
-        #Speler 1 Scissors - Speler 2 Paper
-        elif (player1_choice == 2 and  player2_choice == 3 and print("Player 1 Wins! Because Scissors cuts Paper")):
-            print("")
+            elif player1_choice == 6:
+                D6 = pygame.image.load(D6)
+                D = pygame.transform.scale(D6, (dice_width, dice_height))
+                print ("je hebt 6 gegooid")
 
-        #Speler 1 Paper - Speler 2 Rock
-        elif (player1_choice == 3 and  player2_choice == 1 and print("Player 1 Wins! Because Paper covers Rock")):
-            print("")
 
-        #Speler 1 Paper - Speler 2 Scissors
-        elif (player1_choice == 3 and  player2_choice == 2 and print("Player 2 Wins! Because Scissors cuts Paper")):
-            print("")
+    screen.blit(D,(dice_x, dice_y))
+    screen.blit(dob,(dob_x, dob_y))
 
-        #Zolang bovengenomde klopt het onderstaande wordt uitgevoerd
-        while True:
-            #Tekst met bedankt voor het spelen
-            print("---------------------------------------------------------------")
-            print("Thanks for playing!")
-            #Wachten op enter om opnieuw te beginnen
-            answer = input("Play again? Press enter")
-            print("---------------------------------------------------------------")
-            #Terug naar het begin
-            return RPS()
-#einde declaratie RPS
-RPS()
+
+
+    pygame.display.update()
