@@ -7,14 +7,22 @@ bg = 'Main/Game/wood.jpg'
 board = 'Main/Game/board.png'
 lp = 'Button/GM/levenspunten.png'
 cp = 'Button/GM/conditiepunten.png'
+
+#dobbelsteen
 ds = 'Main/Dice/D1.png'
+ds2 = 'Main/Dice/D2.png'
+ds3 = 'Main/Dice/D3.png'
+ds4 = 'Main/Dice/D4.png'
+ds5 = 'Main/Dice/D5.png'
+ds6 = 'Main/Dice/D6.png'
+
 sf = 'Cards/SFC/SFC1.jpg'
 score = 'Cards/SC/SC1.jpg'
 speler = 'Player/Faces/S1.png'
 pion1 = 'Player/Piece/Rood.png'
 quit = 'Button/GM/Kruis.png'
 start = 'Button/GM/help.png'
-roll = 'Button/GM/knop roll.png'
+roll = 'Button/GM/knop_roll.png'
 knop1 = 'Button/GM/kies_1.png'
 knop2 = 'Button/GM/kies_2.png'
 knop3 = 'Button/GM/kies_3.png'
@@ -23,7 +31,7 @@ knop3 = 'Button/GM/kies_3.png'
 pygame.init()
 
 # grootte van het scherm aangeven
-screen = pygame.display.set_mode((1024, 768), FULLSCREEN)
+screen = pygame.display.set_mode((1024, 768))
 BG = pygame.image.load(bg).convert()
 # achtergrondkleur
 # screen.fill((80, 200, 250))
@@ -38,7 +46,7 @@ gameboard = pygame.transform.scale(spelbord, (500, 500))
 levenspunt = pygame.image.load(lp)
 
 # Hervormen van de afbeelding
-lifepoints = pygame.transform.scale(levenspunt, (250, 40))
+lifepoints = pygame.transform.scale(levenspunt, (250, 50))
 
 # conditiepunten afbeelding
 CP = pygame.image.load(cp)
@@ -61,7 +69,7 @@ Roll = pygame.image.load(roll)
 Roll = pygame.transform.scale(Roll, (100, 100))
 
 # superfight kaart
-SF = pygame.image.load(sf)
+SF = pygame.image.load(sf).convert_alpha()
 SF = pygame.transform.scale(SF, (200, 300))
 
 # score
@@ -87,7 +95,9 @@ Knop2 = pygame.transform.scale(Knop2, (60, 60))
 Knop3 = pygame.image.load(knop3)
 Knop3 = pygame.transform.scale(Knop3, (60, 60))
 
-# zolang de bovenstaande klopt
+# zolang de bovenstaande kloptKnop3 = pygame.transform.scale(Knop3, (60, 60))
+
+
 while True:
     # ophalen van pygame event
     for event in pygame.event.get():
@@ -98,10 +108,13 @@ while True:
             # sluit de pygame
             exit()
         if event.type == MOUSEBUTTONDOWN:
+
+            pygame.image.load(Quit)
             # detect sluitknop
+            exit()
             pygame.quit()
             # sluit de pygame
-            exit()
+
 
     # locaties op het spelbord
     screen.blit(BG, (0, 0))
