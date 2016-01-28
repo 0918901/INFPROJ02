@@ -5,7 +5,7 @@ from sys import exit
 
 def main():
     #afbeeldingen locaties aangeven
-    board       = 'Main/Game/Spelbord.jpg'
+    board       = 'Main/handleiding.jpg'
     lp          = 'Button/GM/levenspunten.png'
     cp          = 'Button/GM/conditiepunten.png'
     ds          = 'Main/Dice/D0.png'

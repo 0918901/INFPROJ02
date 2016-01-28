@@ -17,7 +17,6 @@ ds4 = 'Main/Dice/D4.png'
 ds5 = 'Main/Dice/D5.png'
 ds6 = 'Main/Dice/D6.png'
 
-sf = 'Cards/SFC/SFC1.jpg'
 score = 'Cards/SC/SC1.jpg'
 speler = 'Player/Faces/S1.png'
 pion1 = 'Player/Piece/Rood.png'
@@ -28,6 +27,26 @@ knop1 = 'Button/GM/kies_1.png'
 knop2 = 'Button/GM/kies_2.png'
 knop3 = 'Button/GM/kies_3.png'
 
+SFCA  = 'Cards/SFC/SFCA.png'
+SFC1  = 'Cards/SFC/SFC1.png'
+SFC2  = 'Cards/SFC/SFC2.png'
+SFC3  = 'Cards/SFC/SFC3.png'
+SFC4  = 'Cards/SFC/SFC4.png'
+SFC5  = 'Cards/SFC/SFC5.png'
+SFC6  = 'Cards/SFC/SFC6.png'
+SFC7  = 'Cards/SFC/SFC7.png'
+SFC8  = 'Cards/SFC/SFC8.png'
+SFC9  = 'Cards/SFC/SFC9.png'
+SFC10  = 'Cards/SFC/SFC10.png'
+SFC11  = 'Cards/SFC/SFC11.png'
+SFC12  = 'Cards/SFC/SFC12.png'
+SFC13  = 'Cards/SFC/SFC13.png'
+SFC14  = 'Cards/SFC/SFC14.png'
+SFC15  = 'Cards/SFC/SFC15.png'
+SFC16  = 'Cards/SFC/SFC16.png'
+SFC17  = 'Cards/SFC/SFC17.png'
+SFC18  = 'Cards/SFC/SFC18.png'
+
 #knop1
 button_width        = 100
 button_height       = 100
@@ -37,6 +56,11 @@ button_y            = 200
 #dice
 dice_width      =  100
 dice_height     =  100
+
+sfc_width  =   200
+sfc_height =   300
+sfc_x      =   50
+sfc_y      =   200
 
 # opstarten van pygame
 pygame.init()
@@ -80,8 +104,8 @@ Roll = pygame.image.load(roll)
 Roll = pygame.transform.scale(Roll, (button_width, button_height))
 
 # superfight kaart
-SF = pygame.image.load(sf).convert_alpha()
-SF = pygame.transform.scale(SF, (200, 300))
+SFCA = pygame.image.load(SFCA).convert_alpha()
+SFC = pygame.transform.scale(SFCA, (200, 300))
 
 # score
 Score = pygame.image.load(score)
@@ -121,43 +145,54 @@ while True:
             # sluit de pygame
             exit()
 
+        #knop voor dobbelsteen
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
-
-            if mouseX >=(button_x+900) and mouseY>= (button_y+200):
+            if mouseX >=button_x and mouseY>= button_y and mouseX<=(button_x+100) and mouseY<= (button_y+100):
                 print("je hebt de roll knop gevonden")
-            player1_choice = random.randint(1,6)
+                player1_choice = random.randint(1,6)
 
+                if player1_choice == 1:
+                    D1 = pygame.image.load(ds)
+                    D = pygame.transform.scale(D1, (dice_width, dice_height))
+                    SFC1 = pygame.image.load(SFC1)
+                    SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
+                    print ("je hebt 1 gegooid")
 
-            if player1_choice == 1:
-                D1 = pygame.image.load(ds)
-                D = pygame.transform.scale(D1, (dice_width, dice_height))
-                print ("je hebt 1 gegooid")
+                elif player1_choice == 2:
+                    D2 = pygame.image.load(ds2)
+                    D = pygame.transform.scale(D2, (dice_width, dice_height))
+                    SFC2 = pygame.image.load(SFC2)
+                    SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
+                    print ("je hebt 2 gegooid")
 
-            elif player1_choice == 2:
-                D2 = pygame.image.load(ds2)
-                D = pygame.transform.scale(D2, (dice_width, dice_height))
-                print ("je hebt 2 gegooid")
+                elif player1_choice == 3:
+                    D3 = pygame.image.load(ds3)
+                    D = pygame.transform.scale(D3, (dice_width, dice_height))
+                    SFC3 = pygame.image.load(SFC3)
+                    SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
+                    print ("je hebt 3 gegooid")
 
-            elif player1_choice == 3:
-                D3 = pygame.image.load(ds3)
-                D = pygame.transform.scale(D3, (dice_width, dice_height))
-                print ("je hebt 3 gegooid")
+                elif player1_choice == 4:
+                    D4 = pygame.image.load(ds4)
+                    D = pygame.transform.scale(D4, (dice_width, dice_height))
+                    SFC4 = pygame.image.load(SFC4)
+                    SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
+                    print ("je hebt 4 gegooid")
 
-            elif player1_choice == 4:
-                D4 = pygame.image.load(ds4)
-                D = pygame.transform.scale(D4, (dice_width, dice_height))
-                print ("je hebt 4 gegooid")
+                elif player1_choice == 5:
+                    D5 = pygame.image.load(ds5)
+                    D = pygame.transform.scale(D5, (dice_width, dice_height))
+                    SFC5 = pygame.image.load(SFC5)
+                    SFC = pygame.transform.scale(SFC5, (sfc_width, sfc_height))
+                    print ("je hebt 5 gegooid")
 
-            elif player1_choice == 5:
-                D5 = pygame.image.load(ds5)
-                D = pygame.transform.scale(D5, (dice_width, dice_height))
-                print ("je hebt 5 gegooid")
-
-            elif player1_choice == 6:
-                D6 = pygame.image.load(ds6)
-                D = pygame.transform.scale(D6, (dice_width, dice_height))
-                print ("je hebt 6 gegooid")
+                elif player1_choice == 6:
+                    D6 = pygame.image.load(ds6)
+                    D = pygame.transform.scale(D6, (dice_width, dice_height))
+                    SFC6 = pygame.image.load(SFC6)
+                    SFC = pygame.transform.scale(SFC6, (sfc_width, sfc_height))
+                    print ("je hebt 6 gegooid")
 
 
 
@@ -170,7 +205,7 @@ while True:
     screen.blit(Start, (900, 15))
     screen.blit(D, (900, 80))
     screen.blit(Roll, (900, 200))
-    screen.blit(SF, (550, 20))
+    screen.blit(SFC, (550, 20))
     screen.blit(Speler, (850, 450))
     screen.blit(red_Pion, (460, 530))
     screen.blit(Score, (550, 350))
