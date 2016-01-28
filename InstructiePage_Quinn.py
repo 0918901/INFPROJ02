@@ -1,4 +1,3 @@
-__author__ = 'quinnjansen'
 #Bestanden importeren
 import pygame
 from sys import exit
