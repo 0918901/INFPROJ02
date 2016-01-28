@@ -1,25 +1,13 @@
-import pygame, random
-from pygame.locals import *
-from sys import exit
-
+import pygame
 pygame.init()
-WINDOWS_SIZE =[750,500]
-screen = pygame.display.set_mode(WINDOWS_SIZE)
-pygame.display.set_caption('bordspel')
-
-screen.fill((255,0,200))
-
-
-while True:
-    # ophalen van pygame event
-    for event in pygame.event.get():
-        # anders stop de pygame
-        if event.type == QUIT:
-            # detect sluitknop
-
-            pygame.quit()
-            # sluit de pygame
-            exit()
-
+screen = pygame.display.set_mode((1280,1024))
+screen.fill((80, 200, 250))
+pygame.display.set_caption('Survival game')
+done=False
 pygame.display.flip()
-pygame.quit()
+
+
+while not done:
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                        done = True
