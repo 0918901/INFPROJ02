@@ -123,8 +123,8 @@ while True:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
-            print ("X =",mouseX, "Y =",mouseY)
-            if mouseX <= (button_x+900) and mouseY <= (button_y+200):
+
+            if mouseX >=(button_x+900) and mouseY>= (button_y+200):
                 print("je hebt de roll knop gevonden")
             player1_choice = random.randint(1,6)
 
