@@ -1,3 +1,4 @@
+# Reuben heeft het bijgewerkt
 #Bestanden importeren
 import pygame
 from pygame.locals import *
