@@ -5,7 +5,7 @@ from sys import exit
 #afbeelding locaties
 bg = 'Main/Menu/bg.jpg'
 play = 'Button/SM/play.png'
-quit = 'Button/SM/quit.png'
+quit = 'Button/SM/quit2.png'
 
 SCREEN_SIZE = (1050, 768)
 
