@@ -11,18 +11,18 @@ cp          = 'Button/GM/conditiepunten.png'
 ds          = 'Main/Dice/D1.png'
 sf          = 'Cards/SFC/SFC1.png'
 score       = 'Cards/SC/SC1.jpg'
-speler      = 'Player/S1.png'
+speler      = 'Player/faces/S1.png'
 pion1       = 'Player/Piece/Rood.png'
 quit        = 'Button/GM/kruis.png'
 start       = 'Button/GM/help.png'
-roll        = 'Button/GM/knop roll.png'
+roll        = 'Button/GM/knop_roll.png'
 
 #opstarten van pygame
 pygame.init()
 
 
 #grootte van het scherm aangeven
-screen = pygame.display.set_mode((1050, 768))
+screen = pygame.display.set_mode((1024, 768))
 BG = pygame.image.load(bg).convert()
 #achtergrondkleur
 #screen.fill((80, 200, 250))
@@ -84,6 +84,17 @@ while True:
             pygame.quit()
             #sluit de pygame
             exit()
+
+            invoer = input("CLICK R")
+
+            rolling_dice = "yes"
+
+            if invoer == "r":
+
+                def message_display(text):
+                    largeText = pygame.font.Font("freesandsbold.ttf",155)
+                    textSurf, TextRect = text_object(text, largeText)
+
 
     #locaties op het spelbord
     screen.blit(BG, (0,0))
