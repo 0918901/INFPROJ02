@@ -7,7 +7,7 @@ from sys import exit
 
 #afbeeldingen inladen
 background_image    = 'Main/Instructions/SH.jpg'
-terug               = 'Main/instructions/kruis2.png'
+back               = 'Main/instructions/Kruis2.png'
 
 #Grootte van scherm aangeven
 screen_width        = 768
@@ -18,14 +18,14 @@ RodeKnopje_width        = 40
 RodeKnopje_height       = 40
 
 #venster aanroepen met dubble buffer [extra snelheid](sneller laden)
-screen = pygame.display.set_mode((screen_height,screen_width),FULLSCREEN, 32)
+screen = pygame.display.set_mode((screen_height,screen_width))
 
 #Achtergrond aanroepen en vervormen naar schermgrootte [boven aangegeven](regel 14-15)
 background_image = pygame.image.load(background_image)
 background_image = pygame.transform.scale(background_image, (screen_height,screen_width))
 
 #Play knop aanroepen en vervormen naar aangegeven grootte [boven aangegeven](regel 18-19)
-terug_knop = pygame.image.load(terug)
+terug_knop = pygame.image.load(back)
 terug_knop = pygame.transform.scale(terug_knop, (RodeKnopje_width , RodeKnopje_height))
 
 
@@ -61,7 +61,7 @@ while True:
 
     #toon in venster (image, (x, y))
     screen.blit(background_image, (0, 0))
-    screen.blit(terug,(950,15))
+    screen.blit(terug_knop,(950,15))
 
     #vernieuw de venster op verandering
     pygame.display.update()
