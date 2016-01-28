@@ -5,7 +5,7 @@ from sys import exit
 
 def main():
     #afbeeldingen locaties aangeven
-    board       = 'Main/handleiding.jpg'
+    board       = 'Main/Instructions/SH.jpg'
     lp          = 'Button/GM/levenspunten.png'
     cp          = 'Button/GM/conditiepunten.png'
     ds          = 'Main/Dice/D0.png'
@@ -22,7 +22,7 @@ def main():
     screen_height       = 1024
 
     #grootte van het scherm aangeven
-    screen = pygame.display.set_mode((screen_height,screen_width),FULLSCREEN, 32)
+    screen = pygame.display.set_mode((screen_height,screen_width))
 
     #Laden van afbeelding
     spelbord = pygame.image.load(board).convert()
