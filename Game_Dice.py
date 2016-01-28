@@ -11,7 +11,7 @@ D3    = 'Main/Dice/D3.png'
 D4    = 'Main/Dice/D4.png'
 D5    = 'Main/Dice/D5.png'
 D6    = 'Main/Dice/D6.png'
-dob   = 'Button/GM/knop roll.png'
+dob   = 'Button/GM/knop_roll.png'
 
 screen_width   = 768
 screen_height  = 1024
@@ -79,7 +79,7 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
             print ("X =",mouseX, "Y =",mouseY)
-            if mouseX >= dob_x and mouseY >= dob_y and mouseX <= (dob_x+100) and mouseY <= (dob_y+100):
+            if  mouseX <= (dob_x+100) and mouseY <= (dob_y+100):
                 print("je hebt de roll knop gevonden")
             player1_choice = random.randint(1,6)
             if player1_choice == 0:
