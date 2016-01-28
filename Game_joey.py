@@ -28,6 +28,12 @@ knop1 = 'Button/GM/kies_1.png'
 knop2 = 'Button/GM/kies_2.png'
 knop3 = 'Button/GM/kies_3.png'
 
+#knop afsluiten
+close_width         = 40
+close_height        = 40
+close_x             = 950
+close_y             = 15
+
 #knop1
 button_width        = 100
 button_height       = 100
@@ -40,6 +46,8 @@ dice_height     =  100
 
 # opstarten van pygame
 pygame.init()
+Quit = pygame.image.load(quit)
+Quit = pygame.transform.scale(Quit, (close_width,close_height))
 
 # grootte van het scherm aangeven
 screen = pygame.display.set_mode((1024, 768))
@@ -121,19 +129,27 @@ while True:
             # sluit de pygame
             exit()
 
+
+
+
         #knop voor dobbelsteen
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
+            if mouseX >=close_x and mouseY>= close_y and mouseX<=(close_x+100) and mouseY<= (close_y+100):
+                pygame.quit()
+                # sluit de pygame
+                exit()
+                from Game_Startmenu_Reuben import *
             if mouseX >=button_x and mouseY>= button_y and mouseX<=(button_x+100) and mouseY<= (button_y+100):
                 print("je hebt de roll knop gevonden")
                 player1_choice = random.randint(1,6)
+
 
                 if player1_choice == 1:
                     D1 = pygame.image.load(ds)
                     D = pygame.transform.scale(D1, (dice_width, dice_height))
                     print ("je hebt 1 gegooid")
 
-                elif player1_choice == 2:
                     D2 = pygame.image.load(ds2)
                     D = pygame.transform.scale(D2, (dice_width, dice_height))
                     print ("je hebt 2 gegooid")
@@ -157,8 +173,7 @@ while True:
                     D6 = pygame.image.load(ds6)
                     D = pygame.transform.scale(D6, (dice_width, dice_height))
                     print ("je hebt 6 gegooid")
-
-
+                    screen.fill((255, 255, 255))
 
     # locaties op het spelbord
     screen.blit(BG, (0, 0))
