@@ -121,43 +121,42 @@ while True:
             # sluit de pygame
             exit()
 
+        #knop voor dobbelsteen
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
-
-            if mouseX >=(button_x+900) and mouseY>= (button_y+200):
+            if mouseX >=button_x and mouseY>= button_y and mouseX<=(button_x+100) and mouseY<= (button_y+100):
                 print("je hebt de roll knop gevonden")
-            player1_choice = random.randint(1,6)
+                player1_choice = random.randint(1,6)
 
+                if player1_choice == 1:
+                    D1 = pygame.image.load(ds)
+                    D = pygame.transform.scale(D1, (dice_width, dice_height))
+                    print ("je hebt 1 gegooid")
 
-            if player1_choice == 1:
-                D1 = pygame.image.load(ds)
-                D = pygame.transform.scale(D1, (dice_width, dice_height))
-                print ("je hebt 1 gegooid")
+                elif player1_choice == 2:
+                    D2 = pygame.image.load(ds2)
+                    D = pygame.transform.scale(D2, (dice_width, dice_height))
+                    print ("je hebt 2 gegooid")
 
-            elif player1_choice == 2:
-                D2 = pygame.image.load(ds2)
-                D = pygame.transform.scale(D2, (dice_width, dice_height))
-                print ("je hebt 2 gegooid")
+                elif player1_choice == 3:
+                    D3 = pygame.image.load(ds3)
+                    D = pygame.transform.scale(D3, (dice_width, dice_height))
+                    print ("je hebt 3 gegooid")
 
-            elif player1_choice == 3:
-                D3 = pygame.image.load(ds3)
-                D = pygame.transform.scale(D3, (dice_width, dice_height))
-                print ("je hebt 3 gegooid")
+                elif player1_choice == 4:
+                    D4 = pygame.image.load(ds4)
+                    D = pygame.transform.scale(D4, (dice_width, dice_height))
+                    print ("je hebt 4 gegooid")
 
-            elif player1_choice == 4:
-                D4 = pygame.image.load(ds4)
-                D = pygame.transform.scale(D4, (dice_width, dice_height))
-                print ("je hebt 4 gegooid")
+                elif player1_choice == 5:
+                    D5 = pygame.image.load(ds5)
+                    D = pygame.transform.scale(D5, (dice_width, dice_height))
+                    print ("je hebt 5 gegooid")
 
-            elif player1_choice == 5:
-                D5 = pygame.image.load(ds5)
-                D = pygame.transform.scale(D5, (dice_width, dice_height))
-                print ("je hebt 5 gegooid")
-
-            elif player1_choice == 6:
-                D6 = pygame.image.load(ds6)
-                D = pygame.transform.scale(D6, (dice_width, dice_height))
-                print ("je hebt 6 gegooid")
+                elif player1_choice == 6:
+                    D6 = pygame.image.load(ds6)
+                    D = pygame.transform.scale(D6, (dice_width, dice_height))
+                    print ("je hebt 6 gegooid")
 
 
 
