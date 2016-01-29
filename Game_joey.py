@@ -22,7 +22,7 @@ score = 'Cards/SC/SC1.jpg'
 speler = 'Player/Faces/S1.png'
 pion1 = 'Player/Piece/Rood.png'
 quit = 'Button/GM/Kruis.png'
-start = 'Button/GM/help.png'
+help1 = 'Button/GM/help.png'
 roll = 'Button/GM/knop_roll.png'
 knop1 = 'Button/GM/kies_1.png'
 knop2 = 'Button/GM/kies_2.png'
@@ -80,9 +80,14 @@ pygame.init()
 #boksbal
 roodPion_width =    50
 roodPion_height =   50
-roodPion_x       =
+roodPion_x       =  460
+roodPion_y      =   530
+
+
 red_Pion = pygame.image.load(pion1)
-red_Pion = pygame.transform.scale(red_Pion, (50, 50))
+red_Pion = pygame.transform.scale(red_Pion, (roodPion_width, roodPion_height))
+
+
 # grootte van het scherm aangeven
 screen = pygame.display.set_mode((1024, 768))
 BG = pygame.image.load(bg).convert()
@@ -109,9 +114,9 @@ CP = pygame.transform.scale(CP, (40, 40))
 Quit = pygame.image.load(quit)
 Quit = pygame.transform.scale(Quit, (40, 40))
 
-# Start button
-Start = pygame.image.load(start)
-Start = pygame.transform.scale(Start, (40, 40))
+# help button
+Help = pygame.image.load(help1)
+Help = pygame.transform.scale(Help, (hulp_width, hulp_height))
 
 # dobbelsteen
 DS = pygame.image.load(ds)
@@ -146,14 +151,17 @@ Knop2 = pygame.transform.scale(Knop2, (60, 60))
 Knop3 = pygame.image.load(knop3)
 Knop3 = pygame.transform.scale(Knop3, (60, 60))
 
-#hulp knop
-hulp = pygame.image.load(start)
-hulp = pygame.transform.scale(hulp, (hulp_width, hulp_height))
 
 # zolang de bovenstaande kloptKnop3 = pygame.transform.scale(Knop3, (60, 60))
 D1 = pygame.image.load(ds)
 D = pygame.transform.scale(D1, (dice_width, dice_height))
 
+#LP
+font = pygame.font.SysFont("Arial Black", 20)
+text = font.render("Speler 1 LP:", True, (0, 0, 0))
+#CP
+font2 = pygame.font.SysFont("Arial Black", 20)
+text2 = font.render("CP:15", True, (0, 0, 0))
 while True:
     # ophalen van pygame event
     for event in pygame.event.get():
@@ -166,16 +174,16 @@ while True:
 
 
 
-
-
         #knop voor dobbelsteen
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
-            if mouseX >=hulp_x and mouseY>= hulp_y and mouseX<=(hulp_x+100) and mouseY<= (hulp_y+100):
-                from InstructiePage_Quinn import *
+            if mouseX >= hulp_x and mouseY>= hulp_y  and mouseX<=(hulp_x+hulp_width) and mouseY<= (hulp_y+hulp_height):
+                print("je hebt de instruction knop gevonden")
+                import GameInstructions_Reuben
 
-            if mouseX >=close_x and mouseY>= close_y and mouseX<=(close_x+100) and mouseY<= (close_y+100):
-                from Startmenu_Reuben import *
+            if mouseX >=close_x and mouseY>= close_y and mouseX<=(close_x+close_width) and mouseY<= (close_y+close_height):
+                print("je hebt de stop knop gevonden")
+                import GameStartMenu_Reuben
 
             if mouseX >=button_x and mouseY>= button_y and mouseX<=(button_x+100) and mouseY<= (button_y+100):
                 print("je hebt de roll knop gevonden")
@@ -185,15 +193,15 @@ while True:
                 if player1_choice == 1:
                     D1 = pygame.image.load(ds)
                     D = pygame.transform.scale(D1, (dice_width, dice_height))
-                    #SFC1 = pygame.image.load(SFC1)
-                    #SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
+                    SFC1 = pygame.image.load(SFC1)
+                    SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
                     print ("je hebt 1 gegooid")
 
                 elif player1_choice == 2:
                     D2 = pygame.image.load(ds2)
                     D = pygame.transform.scale(D2, (dice_width, dice_height))
-                    #SFC2 = pygame.image.load(SFC2)
-                    #SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
+                    SFC2 = pygame.image.load(SFC2)
+                    SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
                     print ("je hebt 2 gegooid")
 
                 elif player1_choice == 3:
@@ -227,20 +235,26 @@ while True:
 
     # locaties op het spelbord
     screen.blit(BG, (0, 0))
-    screen.blit(lifepoints, (20, 15))
+    #screen.blit(lifepoints, (20, 15))
     screen.blit(gameboard, (20, 100))
-    screen.blit(CP, (300, 15))
-    screen.blit(Quit, (950, 15))
-    screen.blit(Start, (900, 15))
+    #screen.blit(CP, (300, 15))
+    screen.blit(Quit, (close_x, close_y))
+    screen.blit(Help, (hulp_x, hulp_y))
     screen.blit(D, (900, 80))
     screen.blit(Roll, (900, 200))
     screen.blit(SFC, (550, 20))
     screen.blit(Speler, (850, 450))
-    screen.blit(red_Pion, (460, 530))
+    screen.blit(red_Pion, (460,100))
     screen.blit(Score, (550, 350))
     screen.blit(Knop1, (550, 650))
     screen.blit(Knop2, (650, 650))
     screen.blit(Knop3, (750, 650))
 
+    screen.blit(text,
+    (110 - text.get_width() // 2, 40 - text.get_height() // 2))
+
+
+    screen.blit(text2,
+    (320 - text.get_width() // 2, 40 - text.get_height() // 2))
     # Scherm vernieuwen bij verandering
     pygame.display.update()
