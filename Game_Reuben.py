@@ -185,7 +185,7 @@ instructie  = Knoppen       ('Button/SM/instructions.png',  button_width,   butt
 stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,      stop_x,         stop_y      )
 
 
-screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),FULLSCREEN | DOUBLEBUF,32)
+screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width))
 
 background = pygame.image.load                      (achtergrond.Image)
 background = pygame.transform.scale(background,     (scherm.Height, scherm.Width))

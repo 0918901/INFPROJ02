@@ -43,7 +43,7 @@ button_width        = 200
 button_height       = 50
 
 scherm      = Scherm        (screen_width, screen_height)
-screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),FULLSCREEN | DOUBLEBUF,32)
+screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width))
 
 spelregels1 = Knoppen       ('Main/Rules/page1.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
 vorige      = Knoppen       ('Button/IM/previous.png', button_width,   button_height,       vorige_x,    vorige_y     )
@@ -147,7 +147,7 @@ while True:
                     and mouseX <= startmenu_x+button_width \
                     and mouseY <= startmenu_y+button_height:
                 print("je hebt de Startmenu knop gevonden")
-                from GameStartMenu_Reuben import *
+                import GameStartMenu_Reuben
 
             if mouseX >= volgende_x \
                     and mouseY >= volgende_y \
