@@ -147,7 +147,7 @@ while True:
                     and mouseX <= startmenu_x+button_width \
                     and mouseY <= startmenu_y+button_height:
                 print("je hebt de Startmenu knop gevonden")
-                from GameStartMenu_Reuben import *
+                import GameStartMenu_Reuben
 
             if mouseX >= volgende_x \
                     and mouseY >= volgende_y \

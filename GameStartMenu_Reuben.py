@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from sys import exit
 
 class Achtergrond:
     def __init__(self, image, width, height, pos_x, pos_y):
@@ -113,8 +112,7 @@ while True:
                     and mouseX <= start_x+button_width \
                     and mouseY <= start_y+button_height:
                 print("je hebt de New Game knop gevonden")
-                import Game_Reuben
-
+                import Game_joey
 
             if mouseX >= instr_x \
                     and mouseY >= instr_y \
