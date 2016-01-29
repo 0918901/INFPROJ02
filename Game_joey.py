@@ -69,12 +69,20 @@ sfc_height =   300
 sfc_x      =   50
 sfc_y      =   200
 
-
+#hulp knop
+hulp_width     =     40
+hulp_height    =     40
+hulp_x         =     900
+hulp_y         =     15
 # opstarten van pygame
 pygame.init()
-Quit = pygame.image.load(quit)
-Quit = pygame.transform.scale(Quit, (close_width,close_height))
 
+#boksbal
+roodPion_width =    50
+roodPion_height =   50
+roodPion_x       =
+red_Pion = pygame.image.load(pion1)
+red_Pion = pygame.transform.scale(red_Pion, (50, 50))
 # grootte van het scherm aangeven
 screen = pygame.display.set_mode((1024, 768))
 BG = pygame.image.load(bg).convert()
@@ -107,7 +115,7 @@ Start = pygame.transform.scale(Start, (40, 40))
 
 # dobbelsteen
 DS = pygame.image.load(ds)
-DS = pygame.transform.scale(DS, (dice_width,dice_height ))
+DS = pygame.transform.scale(DS, (dice_width,dice_height))
 
 # knop roll
 Roll = pygame.image.load(roll)
@@ -125,8 +133,6 @@ Score = pygame.transform.scale(Score, (300, 300))
 Speler = pygame.image.load(speler)
 Speler = pygame.transform.scale(Speler, (100, 100))
 
-red_Pion = pygame.image.load(pion1)
-red_Pion = pygame.transform.scale(red_Pion, (50, 50))
 
 # knop1
 Knop1 = pygame.image.load(knop1)
@@ -140,8 +146,11 @@ Knop2 = pygame.transform.scale(Knop2, (60, 60))
 Knop3 = pygame.image.load(knop3)
 Knop3 = pygame.transform.scale(Knop3, (60, 60))
 
-# zolang de bovenstaande kloptKnop3 = pygame.transform.scale(Knop3, (60, 60))
+#hulp knop
+hulp = pygame.image.load(start)
+hulp = pygame.transform.scale(hulp, (hulp_width, hulp_height))
 
+# zolang de bovenstaande kloptKnop3 = pygame.transform.scale(Knop3, (60, 60))
 D1 = pygame.image.load(ds)
 D = pygame.transform.scale(D1, (dice_width, dice_height))
 
@@ -158,9 +167,13 @@ while True:
 
 
 
+
         #knop voor dobbelsteen
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
+            if mouseX >=hulp_x and mouseY>= hulp_y and mouseX<=(hulp_x+100) and mouseY<= (hulp_y+100):
+                from InstructiePage_Quinn import *
+
             if mouseX >=close_x and mouseY>= close_y and mouseX<=(close_x+100) and mouseY<= (close_y+100):
                 from Startmenu_Reuben import *
 
@@ -172,43 +185,43 @@ while True:
                 if player1_choice == 1:
                     D1 = pygame.image.load(ds)
                     D = pygame.transform.scale(D1, (dice_width, dice_height))
-                    SFC1 = pygame.image.load(SFC1)
-                    SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
+                    #SFC1 = pygame.image.load(SFC1)
+                    #SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
                     print ("je hebt 1 gegooid")
 
                 elif player1_choice == 2:
                     D2 = pygame.image.load(ds2)
                     D = pygame.transform.scale(D2, (dice_width, dice_height))
-                    SFC2 = pygame.image.load(SFC2)
-                    SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
+                    #SFC2 = pygame.image.load(SFC2)
+                    #SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
                     print ("je hebt 2 gegooid")
 
                 elif player1_choice == 3:
                     D3 = pygame.image.load(ds3)
                     D = pygame.transform.scale(D3, (dice_width, dice_height))
-                    SFC3 = pygame.image.load(SFC3)
-                    SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
+                    #SFC3 = pygame.image.load(SFC3)
+                    #SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
                     print ("je hebt 3 gegooid")
 
                 elif player1_choice == 4:
                     D4 = pygame.image.load(ds4)
                     D = pygame.transform.scale(D4, (dice_width, dice_height))
-                    SFC4 = pygame.image.load(SFC4)
-                    SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
+                    #SFC4 = pygame.image.load(SFC4)
+                    #SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
                     print ("je hebt 4 gegooid")
 
                 elif player1_choice == 5:
                     D5 = pygame.image.load(ds5)
                     D = pygame.transform.scale(D5, (dice_width, dice_height))
-                    SFC5 = pygame.image.load(SFC5)
-                    SFC = pygame.transform.scale(SFC5, (sfc_width, sfc_height))
+                    #SFC5 = pygame.image.load(SFC5)
+                    #SFC = pygame.transform.scale(SFC5, (sfc_width, sfc_height))
                     print ("je hebt 5 gegooid")
 
                 elif player1_choice == 6:
                     D6 = pygame.image.load(ds6)
                     D = pygame.transform.scale(D6, (dice_width, dice_height))
-                    SFC6 = pygame.image.load(SFC6)
-                    SFC = pygame.transform.scale(SFC6, (sfc_width, sfc_height))
+                    #SFC6 = pygame.image.load(SFC6)
+                    #SFC = pygame.transform.scale(SFC6, (sfc_width, sfc_height))
                     print ("je hebt 6 gegooid")
 
 
