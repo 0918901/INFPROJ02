@@ -185,7 +185,7 @@ instructie  = Knoppen       ('Button/SM/instructions.png',  button_width,   butt
 stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,      stop_x,         stop_y      )
 
 
-screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width))
+screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),FULLSCREEN | DOUBLEBUF,32)
 
 background = pygame.image.load                      (achtergrond.Image)
 background = pygame.transform.scale(background,     (scherm.Height, scherm.Width))
@@ -240,7 +240,7 @@ while True:
                     and mouseX <= dobbel_x+button_width \
                     and mouseY <= dobbel_y+button_height:
                 print("je hebt de Roll Dice knop gedrukt")
-                dice_num = random.randint(1,6)
+                dice_num = randint(1,6)
                 if dice_num == 1:
                     dobbelsteen = Dobbelstenen  ('Main/Dice/D1.png', dobbelstn_width, dobbelstn_height,  dobbelstn_x,   dobbelstn_y  )
                     Dice_image = pygame.image.load(dobbelsteen.Image)

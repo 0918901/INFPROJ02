@@ -43,7 +43,7 @@ button_width        = 200
 button_height       = 50
 
 scherm      = Scherm        (screen_width, screen_height)
-screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width))
+screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),FULLSCREEN | DOUBLEBUF,32)
 
 spelregels1 = Knoppen       ('Main/Rules/page1.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
 vorige      = Knoppen       ('Button/IM/previous.png', button_width,   button_height,       vorige_x,    vorige_y     )
