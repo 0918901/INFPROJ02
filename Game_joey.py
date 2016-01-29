@@ -80,18 +80,11 @@ pygame.init()
 #boksbal
 roodPion_width      =    50
 roodPion_height     =   50
-roodPion_x          =  460
-roodPion_y          =   530
+
 
 
 
 #kies 1
-kies1_width =   60
-kies1_height =  60
-kies1_x     =    550
-kies1_y      =   650
-
-
 #rode pion
 red_Pion = pygame.image.load(pion1)
 red_Pion = pygame.transform.scale(red_Pion, (roodPion_width, roodPion_height))
@@ -123,7 +116,6 @@ CP = pygame.transform.scale(CP, (40, 40))
 Quit = pygame.image.load(quit)
 Quit = pygame.transform.scale(Quit, (40, 40))
 
-
 # help button
 Help = pygame.image.load(help1)
 Help = pygame.transform.scale(Help, (hulp_width, hulp_height))
@@ -151,7 +143,7 @@ Speler = pygame.transform.scale(Speler, (100, 100))
 
 # knop1
 Knop1 = pygame.image.load(knop1)
-Knop1 = pygame.transform.scale(Knop1, (kies1_width , kies1_height))
+Knop1 = pygame.transform.scale(Knop1, (60, 60))
 
 # knop2
 Knop2 = pygame.image.load(knop2)
@@ -174,16 +166,17 @@ font2 = pygame.font.SysFont("Arial Black", 20)
 text2 = font.render("CP:15", True, (0, 0, 0))
 
 # Coördinaten vakken
-vakjes = [[470, 105], [470, 152], [470, 188], [470, 225], [470, 263], [470, 320], [470, 377], [470, 415], [470, 450], [470, 490], [470, 542],
-         [418, 472], [380, 472], [343, 472], [306, 472], [250, 472], [192, 472], [154, 472], [118, 472], [80, 472], [30, 472], [30, 419], [30, 380],
-         [30, 344], [30, 306], [30, 249], [30, 193], [30, 156], [30, 119], [30, 81], [30, 30], [80, 32], [120, 32], [155, 32], [193, 32], [250, 32],
-         [306, 32], [343, 32], [381, 32], [418, 32]]
+vakjes = [[470, 105], [470, 152], [470, 188], [470, 225], [470, 9], [470, 320], [470, 377], [470, 415], [470, 450], [470, 490], [470, 542],
+          [470, 540],[380, 540],[410, 540], [306, 472], [250, 472], [192, 472], [154, 472], [118, 472], [80, 472], [30, 472], [30, 419], [30, 380],
+         [380, 344], [30, 306], [30, 249], [30, 193], [30, 156], [30, 119], [30, 81], [30, 30], [80, 32], [120, 32], [155, 32], [193, 32], [250, 32],
+         [306, 32], [343, 32],[380, 105], [470, 105]]
 
 # pion positie
-vak = 1
+# pion positie
+vak = 0
 print(vakjes[vak] [0], vakjes [vak] [1])
 
-roodPion_x  = vakjes[vak] [0]
+roodPion_x = vakjes[vak] [0]
 roodPion_y = vakjes[vak] [1]
 
 while True:
@@ -198,6 +191,7 @@ while True:
 
 
 
+
         #knop voor dobbelsteen
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
@@ -209,22 +203,23 @@ while True:
                 print("je hebt de stop knop gevonden")
                 import GameStartMenu_Reuben
 
-            if mouseX >=kies1_x and mouseY>= kies1_y and mouseX<=(kies1_x+kies1_width) and mouseY<= (kies1_y+kies1_height):
-                print("je hebt de stop knop gevonden")
-                import GameStartMenu_Reuben
-
             if mouseX >=button_x and mouseY>= button_y and mouseX<=(button_x+100) and mouseY<= (button_y+100):
                 print("je hebt de roll knop gevonden")
                 player1_choice = random.randint(1,6)
+
                 vak = vak + player1_choice
-                roodPion_x  = vakjes[vak] [0]
+                roodPion_x = vakjes[vak] [0]
                 roodPion_y = vakjes[vak] [1]
+
+                if vak ==[1] or [10]:
+                    SFC1 = pygame.image.load(SFC1)
+                    SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
 
                 if player1_choice == 1:
                     D1 = pygame.image.load(ds)
                     D = pygame.transform.scale(D1, (dice_width, dice_height))
-                    SFC1 = pygame.image.load(SFC1)
-                    SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
+                    #SFC1 = pygame.image.load(SFC1)
+                    #SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
                     print ("je hebt 1 gegooid")
 
                 elif player1_choice == 2:
@@ -274,9 +269,9 @@ while True:
     screen.blit(Roll, (900, 200))
     screen.blit(SFC, (550, 20))
     screen.blit(Speler, (850, 450))
-    screen.blit(red_Pion, (460,100))
+    screen.blit(red_Pion, (roodPion_x,roodPion_y))
     screen.blit(Score, (550, 350))
-    screen.blit(Knop1, (kies1_x, kies1_y))
+    screen.blit(Knop1, (550, 650))
     screen.blit(Knop2, (650, 650))
     screen.blit(Knop3, (750, 650))
 
