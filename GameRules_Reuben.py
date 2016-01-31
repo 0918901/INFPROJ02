@@ -229,8 +229,10 @@ while True:
             print("je hebt op 3 gedrukt")
 
     screen.blit(background,         (int(spelregels1.Pos_x),    int(spelregels1.Pos_y)))
-    screen.blit(previous_button,    (int(vorige.Pos_x),         int(vorige.Pos_y)))
     screen.blit(gamemenu,           (int(startmenu.Pos_x),      int(startmenu.Pos_y)))
-    screen.blit(second_button,      (int(volgende.Pos_x),       int(volgende.Pos_y)))
+    if player_choice == 2 or player_choice == 3 or player_choice == 4:
+        screen.blit(previous_button,    (int(vorige.Pos_x),         int(vorige.Pos_y)))
+    if player_choice == 1 or player_choice == 2 or player_choice == 3:
+        screen.blit(second_button,      (int(volgende.Pos_x),       int(volgende.Pos_y)))
 
     pygame.display.update()
