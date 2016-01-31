@@ -112,7 +112,7 @@ while True:
                     and mouseX <= start_x+button_width \
                     and mouseY <= start_y+button_height:
                 print("je hebt de New Game knop gevonden")
-                import Game_joey
+                import Game_Reuben
 
             if mouseX >= instr_x \
                     and mouseY >= instr_y \

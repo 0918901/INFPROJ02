@@ -27,8 +27,7 @@ class Bord:
         self.Pos_y  =   pos_y
 
 class Pionnen:
-    def __init__(self, kleur, image, width, height, pos_x, pos_y):
-        self.Kleur  =   kleur
+    def __init__(self, image, width, height, pos_x, pos_y):
         self.Image  =   image
         self.Width  =   width
         self.Height =   height
@@ -167,22 +166,41 @@ bord_height         = 500
 bord_y              = 200
 bord_x              = 250
 
+pion_width          = 50
+pion_height         = 50
+
+pion_rood_x         = bord_x
+pion_rood_y         = bord_y
+
+pion_groen_x        = bord_x
+pion_groen_y        = bord_y
+
+pion_geel_x         = bord_x
+pion_geel_y         = bord_y
+
+pion_blauw_x        = bord_x
+pion_blauw_y        = bord_y
+
 
 scherm      = Scherm        (screen_width, screen_height)
-achtergrond = Achtergrond   ('Main/Game/wood.jpg',          scherm.Height,  scherm.Width,       0,              0           )
+achtergrond = Achtergrond   ('Main/Game/wood.jpg',          scherm.Height,  scherm.Width,       0,            0           )
 
-spellogo    = afbeeldingen  ('Button/SM/logo.png',          logo_width,     logo_height,        logo_x,         logo_y      )
-spelbord    = Knoppen       ('Main/Game/board2.png',        bord_width,     bord_height,        bord_x,         bord_y      )
+spellogo    = afbeeldingen  ('Button/SM/logo.png',          logo_width,     logo_height,        logo_x,       logo_y      )
+spelbord    = Knoppen       ('Main/Game/board2.png',        bord_width,     bord_height,        bord_x,       bord_y      )
 
-dobbelen    = Knoppen       ('Button/GM/dobbel.png',        button_width,   button_height,      dobbel_x,       dobbel_y    )
+dobbelen    = Knoppen       ('Button/GM/dobbel.png',        button_width,   button_height,      dobbel_x,     dobbel_y    )
 
+pion_rood   = Pionnen       ('Player/Piece/Rood.png',       pion_width,     pion_height,      pion_rood_x,    pion_rood_y    )
+pion_groen  = Pionnen       ('Player/Piece/Groen.png',       pion_width,     pion_height,      pion_groen_x,   pion_groen_y    )
+pion_geel   = Pionnen       ('Player/Piece/Geel.png',       pion_width,     pion_height,      pion_geel_x,    pion_geel_y    )
+pion_blauw  = Pionnen       ('Player/Piece/Groen.png',       pion_width,     pion_height,      pion_blauw_x,   pion_blauw_y    )
 
 optie1      = Knoppen       ('Button/GM/optie1.png',        button_width,   button_height,      opt1_x,       opt1_y    )
 optie2      = Knoppen       ('Button/GM/optie2.png',        button_width,   button_height,      opt2_x,       opt2_y    )
 optie3      = Knoppen       ('Button/GM/optie3.png',        button_width,   button_height,      opt3_x,       opt3_y    )
 
-instructie  = Knoppen       ('Button/SM/instructions.png',  button_width,   button_height,      instr_x,        instr_y     )
-stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,      stop_x,         stop_y      )
+instructie  = Knoppen       ('Button/SM/instructions.png',  button_width,   button_height,      instr_x,      instr_y     )
+stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,      stop_x,       stop_y      )
 
 
 screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width))
@@ -199,9 +217,17 @@ Game_board = pygame.transform.scale(Game_board,       (spelbord.Width, spelbord.
 Roll_dice = pygame.image.load                       (dobbelen.Image)
 Roll_dice = pygame.transform.scale(Roll_dice,       (dobbelen.Width, dobbelen.Height))
 
-dobbelsteen = Dobbelstenen  ('Main/Dice/D0.png', dobbelstn_width, dobbelstn_height,  dobbelstn_x,   dobbelstn_y  )
-Dice_image = pygame.image.load(dobbelsteen.Image)
-Dice_image = pygame.transform.scale(Dice_image,(dobbelsteen.Width, dobbelsteen.Height))
+Red_piece = pygame.image.load                       (pion_rood.Image)
+Red_piece = pygame.transform.scale(Red_piece,       (pion_rood.Width, pion_rood.Height))
+
+Green_piece = pygame.image.load                       (pion_groen.Image)
+Green_piece = pygame.transform.scale(Green_piece,       (pion_groen.Width, pion_groen.Height))
+
+Yellow_piece = pygame.image.load                       (pion_geel.Image)
+Yellow_piece = pygame.transform.scale(Yellow_piece,       (pion_geel.Width, pion_geel.Height))
+
+Blue_piece = pygame.image.load                       (pion_blauw.Image)
+Blue_piece = pygame.transform.scale(Blue_piece,       (pion_blauw.Width, pion_blauw.Height))
 
 Option1 = pygame.image.load                       (optie1.Image)
 Option1 = pygame.transform.scale(Option1,       (optie1.Width, optie1.Height))
@@ -335,6 +361,11 @@ while True:
     screen.blit(Option1,    (int(optie1.Pos_x),      int(optie1.Pos_y)))
     screen.blit(Option2,    (int(optie2.Pos_x),      int(optie2.Pos_y)))
     screen.blit(Option3,    (int(optie3.Pos_x),      int(optie3.Pos_y)))
+
+    screen.blit(Red_piece,    (int(pion_rood.Pos_x),      int(pion_rood.Pos_y)))
+    screen.blit(Green_piece,    (int(pion_groen.Pos_x),      int(pion_groen.Pos_y)))
+    screen.blit(Yellow_piece,    (int(pion_geel.Pos_x),      int(pion_geel.Pos_y)))
+    screen.blit(Blue_piece,    (int(pion_blauw.Pos_x),      int(pion_blauw.Pos_y)))
 
     screen.blit(instr_button,   (int(instructie.Pos_x),     int(instructie.Pos_y)))
     screen.blit(stop_button,    (int(stopknop.Pos_x),       int(stopknop.Pos_y)))
