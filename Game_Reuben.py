@@ -4,10 +4,6 @@ from sys import exit
 import pygame
 import sys
 from pygame.locals import *
-import builtins
-from IPython.lib import deepreload
-builtins.reload = deepreload.reload
-
 
 class Scherm:
     def __init__(self, width, height):
