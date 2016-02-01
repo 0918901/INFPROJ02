@@ -114,7 +114,7 @@ CP = pygame.transform.scale(CP, (40, 40))
 
 # Quit button
 Quit = pygame.image.load(quit)
-Quit = pygame.transform.scale(Quit, (40, 40))
+Quit = pygame.transform.scale(Quit, (close_width, close_width))
 
 # help button
 Help = pygame.image.load(help1)
@@ -167,7 +167,7 @@ text2 = font.render("CP:15", True, (0, 0, 0))
 
 # Coördinaten vakken
 vakjes = [[470, 105], [470, 152], [470, 188], [470, 225], [470, 9], [470, 320], [470, 377], [470, 415], [470, 450], [470, 490], [470, 542],
-          [470, 540],[380, 540],[410, 540], [306, 472], [250, 472], [192, 472], [154, 472], [118, 472], [80, 472], [30, 472], [30, 419], [30, 380],
+            [470, 540],[380, 540],[410, 540], [306, 472], [250, 472], [192, 472], [154, 472], [118, 472], [80, 472], [30, 472], [30, 419], [30, 380],
          [380, 344], [30, 306], [30, 249], [30, 193], [30, 156], [30, 119], [30, 81], [30, 30], [80, 32], [120, 32], [155, 32], [193, 32], [250, 32],
          [306, 32], [343, 32],[380, 105], [470, 105]]
 
@@ -178,7 +178,9 @@ print(vakjes[vak] [0], vakjes [vak] [1])
 
 roodPion_x = vakjes[vak] [0]
 roodPion_y = vakjes[vak] [1]
-
+pygame.mixer.music.load('Monopoly - NES - Auction.mp3')
+pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
+pygame.mixer.music.play()
 while True:
     # ophalen van pygame event
     for event in pygame.event.get():
@@ -211,7 +213,7 @@ while True:
                 roodPion_x = vakjes[vak] [0]
                 roodPion_y = vakjes[vak] [1]
 
-                if vak ==[1] or [10]:
+                if vak ==[6] or [7]:
                     SFC1 = pygame.image.load(SFC1)
                     SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
 
@@ -281,5 +283,6 @@ while True:
 
     screen.blit(text2,
     (320 - text.get_width() // 2, 40 - text.get_height() // 2))
+
     # Scherm vernieuwen bij verandering
     pygame.display.update()
