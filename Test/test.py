@@ -15,3 +15,24 @@ def dice_sim(die_size, rolls):
     return None
 
 dice_sim(5,3)
+display_width = 800
+display_height = 600
+
+gameDisplay = pygame.display.set_mode((display_width,display_height))
+pygame.display.set_caption('speler')
+
+black = (0,0,0)
+white = (50,255,255)
+#foto laden
+carImg = pygame.image.load('Player/Faces/S1.png')
+def car(x,y):
+    gameDisplay.blit(carImg, (x,y))
+
+x =  (display_width * 0.25)
+y = (display_height * 0.8)
+x_change = 0
+y_change = 0
+    x+=x_change
+    y+=y_change
+    gameDisplay.fill(white)
+    car(x,y)
