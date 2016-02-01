@@ -84,15 +84,10 @@ while True:
                     and mouseX <= vorige_x+button_width \
                     and mouseY <= vorige_y+button_height:
                 print("je hebt de Previous knop gevonden")
-                player_choice = player_choice - 1
+                player_choice = 1
                 print(player_choice)
                 if player_choice == 1:
                     elementen   = Knoppen       ('Main/Instructions/elements.jpg',  scherm.Height,  scherm.Width,   element_x,      element_y     )
-                    background = pygame.image.load                              (elementen.Image)
-                    background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
-
-                elif player_choice == 2:
-                    elementen   = Knoppen       ('Main/Instructions/controls.jpg',         scherm.Height,       scherm.Width,   element_x,      element_y     )
                     background = pygame.image.load                              (elementen.Image)
                     background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
 
@@ -109,15 +104,9 @@ while True:
                     and mouseX <= volgende_x+button_width \
                     and mouseY <= volgende_y+button_height:
                 print("je hebt de Next knop gevonden")
-                player_choice = player_choice + 1
+                player_choice = 2
                 print(player_choice)
-                if player_choice == 1:
-                    elementen   = Knoppen       ('Main/Instructions/elements.jpg',         scherm.Height,       scherm.Width,   element_x,      element_y     )
-                    background = pygame.image.load                              (elementen.Image)
-                    background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
-
-
-                elif player_choice == 2:
+                if player_choice == 2:
                     elementen   = Knoppen       ('Main/Instructions/controls.jpg',         scherm.Height,       scherm.Width,   element_x,      element_y     )
                     background = pygame.image.load                              (elementen.Image)
                     background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
@@ -143,8 +132,10 @@ while True:
             print("je hebt op 3 gedrukt")
 
     screen.blit(background,         (int(elementen.Pos_x),      int(elementen.Pos_y)))
-    screen.blit(previous_button,    (int(vorige.Pos_x),         int(vorige.Pos_y)))
     screen.blit(gamemenu,           (int(startmenu.Pos_x),      int(startmenu.Pos_y)))
-    screen.blit(second_button,      (int(volgende.Pos_x),       int(volgende.Pos_y)))
+    if player_choice == 2:
+        screen.blit(previous_button,    (int(vorige.Pos_x),         int(vorige.Pos_y)))
+    if player_choice == 1:
+        screen.blit(second_button,      (int(volgende.Pos_x),       int(volgende.Pos_y)))
 
     pygame.display.update()
