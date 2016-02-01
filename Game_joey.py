@@ -3,6 +3,8 @@ import random
 from pygame.locals import *
 from sys import exit
 
+# opstarten van pygame
+pygame.init()
 # afbeeldingen locaties aangeven
 bg = 'Main/Game/wood.jpg'
 board = 'Main/Game/board.png'
@@ -48,41 +50,83 @@ SFC16  = 'Cards/SFC/SFC16.png'
 SFC17  = 'Cards/SFC/SFC17.png'
 SFC18  = 'Cards/SFC/SFC18.png'
 
+clock = pygame.time.Clock()
 #knop afsluiten
-close_width         = 40
-close_height        = 40
-close_x             = 950
-close_y             = 15
+close_width         =   40
+close_height        =   40
+close_x             =   950
+close_y             =   15
 
 #knop1
-button_width        = 100
-button_height       = 100
-button_x            = 900
-button_y            = 200
+button_width        =   100
+button_height       =   100
+button_x            =   900
+button_y            =   200
 
 #dice
-dice_width      =  100
-dice_height     =  100
+dice_width          =   100
+dice_height         =   100
+dice_x              =   900
+dice_y              =   80
 
-sfc_width  =   200
-sfc_height =   300
-sfc_x      =   50
-sfc_y      =   200
+
+#superfight kaart
+sfc_width           =   200
+sfc_height          =   300
+sfc_x               =   50
+sfc_y               =   200
 
 #hulp knop
-hulp_width     =     40
-hulp_height    =     40
-hulp_x         =     900
-hulp_y         =     15
-# opstarten van pygame
-pygame.init()
+hulp_width          =   40
+hulp_height         =   40
+hulp_x              =   900
+hulp_y              =   15
+
+#knop1
+knop1_width     =       60
+knop1_height    =       60
+knop1_x         =       550
+knop1_y         =       650
+
+#knop 2
+knop2_width     =       60
+knop2_height    =       60
+knop2_x         =       650
+knop2_y         =       650
+
+#knop3
+knop3_width     =       60
+knop3_height    =       60
+knop3_x         =       750
+knop3_y         =       650
 
 #boksbal
-roodPion_width      =    50
-roodPion_height     =   50
+roodPion_width      =    25
+roodPion_height     =    25
 
+#sfc kaart
+sfc_height          =   300
+sfc_width           =   200
+sfc_x               =   550
+sfc_y               =   20
 
+#score
+score_height    =   300
+score_width     =   300
+score_x         =   550
+score_y         =   350
 
+#speler
+speler_height        =   100
+speler_width         =   100
+speler_x             =   850
+speler_y             =   450
+
+#gameboard
+gameboard_width     =   500
+gameboard_height    =   500
+gameboard_x         =   900
+gameboard_y         =   50
 
 #kies 1
 #rode pion
@@ -100,17 +144,17 @@ BG = pygame.image.load(bg).convert()
 spelbord = pygame.image.load(board)
 
 # Hervormen van de afbeelding
-gameboard = pygame.transform.scale(spelbord, (500, 500))
+gameboard = pygame.transform.scale(spelbord, (gameboard_width , gameboard_height ))
 
 # Laden van afbeelding
 levenspunt = pygame.image.load(lp)
 
 # Hervormen van de afbeelding
-lifepoints = pygame.transform.scale(levenspunt, (250, 50))
+#lifepoints = pygame.transform.scale(levenspunt, (Lp_height, 50))
 
 # conditiepunten afbeelding
-CP = pygame.image.load(cp)
-CP = pygame.transform.scale(CP, (40, 40))
+#CP = pygame.image.load(cp)
+#CP = pygame.transform.scale(CP, (40, 40))
 
 # Quit button
 Quit = pygame.image.load(quit)
@@ -130,28 +174,28 @@ Roll = pygame.transform.scale(Roll, (button_width, button_height))
 
 # superfight kaart
 SFCA = pygame.image.load(SFCA)
-SFC = pygame.transform.scale(SFCA, (200, 300))
+SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
 
 # score
 Score = pygame.image.load(score)
-Score = pygame.transform.scale(Score, (300, 300))
+Score = pygame.transform.scale(Score, (score_height, score_width))
 
 # player
 Speler = pygame.image.load(speler)
-Speler = pygame.transform.scale(Speler, (100, 100))
+Speler = pygame.transform.scale(Speler, (speler_width, speler_height))
 
 
 # knop1
 Knop1 = pygame.image.load(knop1)
-Knop1 = pygame.transform.scale(Knop1, (60, 60))
+Knop1 = pygame.transform.scale(Knop1, (knop1_width, knop1_height))
 
 # knop2
 Knop2 = pygame.image.load(knop2)
-Knop2 = pygame.transform.scale(Knop2, (60, 60))
+Knop2 = pygame.transform.scale(Knop2, (knop2_width, knop2_height))
 
 # knop3
 Knop3 = pygame.image.load(knop3)
-Knop3 = pygame.transform.scale(Knop3, (60, 60))
+Knop3 = pygame.transform.scale(Knop3, (knop3_height, knop3_width))
 
 
 # zolang de bovenstaande kloptKnop3 = pygame.transform.scale(Knop3, (60, 60))
@@ -165,11 +209,17 @@ text = font.render("Speler 1 LP:", True, (0, 0, 0))
 font2 = pygame.font.SysFont("Arial Black", 20)
 text2 = font.render("CP:15", True, (0, 0, 0))
 
+bx=20
+by=100
 # Coördinaten vakken
-vakjes = [[470, 105], [470, 152], [470, 188], [470, 225], [470, 9], [470, 320], [470, 377], [470, 415], [470, 450], [470, 490], [470, 542],
-            [470, 540],[380, 540],[410, 540], [306, 472], [250, 472], [192, 472], [154, 472], [118, 472], [80, 472], [30, 472], [30, 419], [30, 380],
-         [380, 344], [30, 306], [30, 249], [30, 193], [30, 156], [30, 119], [30, 81], [30, 30], [80, 32], [120, 32], [155, 32], [193, 32], [250, 32],
-         [306, 32], [343, 32],[380, 105], [470, 105]]
+vakjes = [[bx+470,by+10],   [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+145],    [bx+470,by+180],
+          [bx+470,by+240],  [bx+470,by+295],    [bx+470,by+330],    [bx+470,by+367.5],  [bx+470,by+405],
+          [bx+470,by+470],  [bx+405,by+470],    [bx+367.5,by+470],  [bx+330,by+470],    [bx+295,by+470],
+          [bx+240,by+470],  [bx+180,by+470],    [bx+145,by+470],    [bx+105,by+470],    [bx+67.5,by+470],
+          [bx+5,by+470],    [bx+5,by+405],      [bx+5,by+367.5],    [bx+5,by+330],      [bx+5,by+295],
+          [bx+5,by+240],    [bx+5,by+180],      [bx+5,by+145],      [bx+5,by+105],      [bx+5,by+67.5],
+          [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
+          [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
 
 # pion positie
 # pion positie
@@ -213,28 +263,29 @@ while True:
                 roodPion_x = vakjes[vak] [0]
                 roodPion_y = vakjes[vak] [1]
 
-                if vak ==[6] or [7]:
+
+                if vakjes ==[6] or vakjes ==  [7] or vakjes == [16]:
                     SFC1 = pygame.image.load(SFC1)
                     SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
 
                 if player1_choice == 1:
                     D1 = pygame.image.load(ds)
                     D = pygame.transform.scale(D1, (dice_width, dice_height))
-                    #SFC1 = pygame.image.load(SFC1)
-                    #SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
+                    SFC1 = pygame.image.load(SFC1)
+                    SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
                     print ("je hebt 1 gegooid")
 
                 elif player1_choice == 2:
                     D2 = pygame.image.load(ds2)
                     D = pygame.transform.scale(D2, (dice_width, dice_height))
-                    #SFC2 = pygame.image.load(SFC2)
-                    #SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
+                    SFC2 = pygame.image.load(SFC2)
+                    SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
                     print ("je hebt 2 gegooid")
 
                 elif player1_choice == 3:
                     D3 = pygame.image.load(ds3)
                     D = pygame.transform.scale(D3, (dice_width, dice_height))
-                    #SFC3 = pygame.image.load(SFC3)
+                    SFC3 = pygame.image.load(SFC3)
                     #SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
                     print ("je hebt 3 gegooid")
 
@@ -263,19 +314,19 @@ while True:
     # locaties op het spelbord
     screen.blit(BG, (0, 0))
     #screen.blit(lifepoints, (20, 15))
-    screen.blit(gameboard, (20, 100))
+    screen.blit(gameboard, (bx, by))
     #screen.blit(CP, (300, 15))
     screen.blit(Quit, (close_x, close_y))
     screen.blit(Help, (hulp_x, hulp_y))
-    screen.blit(D, (900, 80))
-    screen.blit(Roll, (900, 200))
-    screen.blit(SFC, (550, 20))
-    screen.blit(Speler, (850, 450))
+    screen.blit(D, (dice_x,dice_y ))
+    screen.blit(Roll, (button_x,button_y))
+    screen.blit(SFC, (sfc_x , sfc_y ))
+    screen.blit(Speler, (speler_x, speler_y ))
     screen.blit(red_Pion, (roodPion_x,roodPion_y))
-    screen.blit(Score, (550, 350))
-    screen.blit(Knop1, (550, 650))
-    screen.blit(Knop2, (650, 650))
-    screen.blit(Knop3, (750, 650))
+    screen.blit(Score, (score_x , score_y ))
+    screen.blit(Knop1, (knop1_x, knop1_y))
+    screen.blit(Knop2, (knop2_x, knop2_y))
+    screen.blit(Knop3, (knop3_x, knop3_y))
 
     screen.blit(text,
     (110 - text.get_width() // 2, 40 - text.get_height() // 2))
@@ -286,3 +337,7 @@ while True:
 
     # Scherm vernieuwen bij verandering
     pygame.display.update()
+    clock.tick(60)
+
+pygame.quit()
+quit()
