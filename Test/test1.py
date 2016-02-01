@@ -8,8 +8,11 @@ bg = 'Main/Game/wood.jpg'
 board = 'Main/Game/board.png'
 
 pygame.init()
-sound = pygame.mixer.Sound()
-sound.play()
+#sound = pygame.mixer.Sound()
+#sound.play()
+font = pygame.font.SysFont("comicsansms", 72)
+
+text = font.render("Hello, World", True, (0, 128, 0))
 # grootte van het scherm aangeven
 screen = pygame.display.set_mode((1024, 768))
 BG = pygame.image.load(bg).convert()
@@ -25,7 +28,9 @@ gameboard = pygame.transform.scale(spelbord, (500, 500))
 while True:
     # ophalen van pygame event
     for event in pygame.event.get():
-        # anders stop de pygame
+
+        screen.blit(text,
+        (320 - text.get_width() // 2, 240 - text.get_height() // 2))# anders stop de pygame
         if event.type == QUIT:
             # detect sluitknop
             pygame.quit()
@@ -34,6 +39,7 @@ while True:
 
 
 
+pygame.display.flip()
 
 
 

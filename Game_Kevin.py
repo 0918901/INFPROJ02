@@ -115,6 +115,20 @@ Knop3 = pygame.transform.scale(Knop3, (60, 60))
 D1 = pygame.image.load(ds)
 D = pygame.transform.scale(D1, (dice_width, dice_height))
 
+# Coördinaten vakken
+vakjes = [[470, 105], [470, 152], [470, 188], [470, 225], [470, 263], [470, 320], [470, 377], [470, 415], [470, 450], [470, 490], [470, 542],
+         [418, 472], [380, 472], [343, 472], [306, 472], [250, 472], [192, 472], [154, 472], [118, 472], [80, 472], [30, 472], [30, 419], [30, 380],
+         [30, 344], [30, 306], [30, 249], [30, 193], [30, 156], [30, 119], [30, 81], [30, 30], [80, 32], [120, 32], [155, 32], [193, 32], [250, 32],
+         [306, 32], [343, 32], [381, 32], [418, 32]]
+
+# pion positie
+vak = 0
+print(vakjes[vak] [0], vakjes [vak] [1])
+
+red_Pion_x = vakjes[vak] [0]
+red_Pion_y = vakjes[vak] [1]
+
+
 while True:
     # ophalen van pygame event
     for event in pygame.event.get():
@@ -131,9 +145,11 @@ while True:
             if mouseX >=(button_x+900) and mouseY>= (button_y+200):
                 print("je hebt de roll knop gevonden")
             player1_choice = random.randint(1,6)
-
-
+            vak = vak + player1_choice
+            red_Pion_x = vakjes[vak] [0]
+            red_Pion_y = vakjes[vak] [1]
             if player1_choice == 1:
+
                 D1 = pygame.image.load(ds)
                 D = pygame.transform.scale(D1, (dice_width, dice_height))
                 print ("je hebt 1 gegooid")
@@ -163,25 +179,6 @@ while True:
                 D = pygame.transform.scale(D6, (dice_width, dice_height))
                 print ("je hebt 6 gegooid")
 
-    # Coördinaten vakken
-    vakjes = [[470, 105], [470, 152], [470, 188], [470, 225], [470, 263], [470, 320], [470, 377], [470, 415], [470, 450], [470, 490], [470, 542],
-             [418, 472], [380, 472], [343, 472], [306, 472], [250, 472], [192, 472], [154, 472], [118, 472], [80, 472], [30, 472], [30, 419], [30, 380],
-             [30, 344], [30, 306], [30, 249], [30, 193], [30, 156], [30, 119], [30, 81], [30, 30], [80, 32], [120, 32], [155, 32], [193, 32], [250, 32],
-             [306, 32], [343, 32], [381, 32], [418, 32]]
-
-    # pion positie
-    print(vakjes[1][0])
-
-
-    # teken pion
-    red_Pion_x = 0
-    red_Pion_y = 0
-    vakjes[1][0] = red_Pion_x
-    vakjes[1][0] = red_Pion_y
-
-    # wie is aan de beurt?
-    beurt = 0
-    #dobbelsteenworp
 
     # locaties op het spelbord
     screen.blit(BG, (0, 0))

@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+from sys import exit
 
 class Achtergrond:
     def __init__(self, image, width, height, pos_x, pos_y):
@@ -73,7 +74,7 @@ regels      = Knoppen       ('Button/SM/gamerules.png',     button_width,   butt
 stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,  stop_x,     stop_y   )
 
 
-screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width))
+screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),DOUBLEBUF,32)
 
 background = pygame.image.load                      (achtergrond.Image)
 background = pygame.transform.scale(background,     (scherm.Height, scherm.Width))
@@ -112,7 +113,8 @@ while True:
                     and mouseX <= start_x+button_width \
                     and mouseY <= start_y+button_height:
                 print("je hebt de New Game knop gevonden")
-                import Game_joey
+                import Game_Reuben
+
 
             if mouseX >= instr_x \
                     and mouseY >= instr_y \
