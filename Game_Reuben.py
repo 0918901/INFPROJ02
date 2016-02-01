@@ -4,9 +4,6 @@ from sys import exit
 import pygame
 import sys
 from pygame.locals import *
-import builtins
-from IPython.lib import deepreload
-builtins.reload = deepreload.reload
 
 
 class Scherm:
@@ -382,7 +379,7 @@ dobbelsteen = Dobbelstenen  ('Main/Dice/D0.png', dobbelstn_width, dobbelstn_heig
 Dice_image = pygame.image.load(dobbelsteen.Image)
 Dice_image = pygame.transform.scale(Dice_image,(dobbelsteen.Width, dobbelsteen.Height))
 
-p1_vak = 0
+p1_vak = 5
 p2_vak = 10
 p3_vak = 20
 p4_vak = 30
@@ -400,14 +397,14 @@ while True:
     pion_rood.Pos_x = vakjes[p1_vak] [0]
     pion_rood.Pos_y = vakjes[p1_vak] [1]
 
-    pion_groen.Pos_x = vakjes[p2_vak] [0]
-    pion_groen.Pos_y = vakjes[p2_vak] [1]
+#    pion_groen.Pos_x = vakjes[p2_vak] [0]
+#    pion_groen.Pos_y = vakjes[p2_vak] [1]
 
-    pion_geel.Pos_x = vakjes[p3_vak] [0]
-    pion_geel.Pos_y = vakjes[p3_vak] [1]
+#    pion_geel.Pos_x = vakjes[p3_vak] [0]
+#    pion_geel.Pos_y = vakjes[p3_vak] [1]
 
-    pion_blauw.Pos_x = vakjes[p4_vak] [0]
-    pion_blauw.Pos_y = vakjes[p4_vak] [1]
+#    pion_blauw.Pos_x = vakjes[p4_vak] [0]
+#    pion_blauw.Pos_y = vakjes[p4_vak] [1]
 
     for event in pygame.event.get():
         if event.type == QUIT:
