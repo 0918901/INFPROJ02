@@ -5,7 +5,6 @@ import pygame
 import sys
 from pygame.locals import *
 
-
 class Scherm:
     def __init__(self, width, height):
         self.Width  =   width
@@ -226,11 +225,9 @@ pion_geel_y         = bord_y + 495 - pion_height
 pion_blauw_x        = bord_x + 5
 pion_blauw_y        = bord_y + 5
 
-black = (0,0,0)
-count = 100
+tekst_x             = vlak_x + 50
+tekst_y             = vlak_rood + 10
 
-myfont = pygame.font.SysFont(None,10)
-text = myfont.render("LP: "+str(count), True, black)
 
 
 
@@ -294,6 +291,8 @@ p3_cp       = Conditiepunten('Main/Elements/cp.png',     cp_width,   cp_height, 
 
 p4_lp       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      p4_lp_x,       p4_lp_y      )
 p4_cp       = Conditiepunten('Main/Elements/cp.png',     cp_width,   cp_height,      p4_cp_x,       p4_cp_y      )
+
+tekst       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      tekst_x,       tekst_y     )
 
 
 
@@ -382,12 +381,16 @@ stop_button = pygame.transform.scale(stop_button,   (stopknop.Width, stopknop.He
 
 pygame.init()
 
+p1_lp_start         = int(10)
+font = pygame.font.Font(None, 36)
+text = font.render("LP: "+str(p1_lp_start), 1, (10, 10, 10))
+
 dice_num = 0
 dobbelsteen = Dobbelstenen  ('Main/Dice/D0.png', dobbelstn_width, dobbelstn_height,  dobbelstn_x,   dobbelstn_y)
 Dice_image = pygame.image.load(dobbelsteen.Image)
 Dice_image = pygame.transform.scale(Dice_image,(dobbelsteen.Width, dobbelsteen.Height))
 
-p1_vak = 5
+p1_vak = 0
 p2_vak = 10
 p3_vak = 20
 p4_vak = 30
@@ -405,14 +408,14 @@ while True:
     pion_rood.Pos_x = vakjes[p1_vak] [0]
     pion_rood.Pos_y = vakjes[p1_vak] [1]
 
-#    pion_groen.Pos_x = vakjes[p2_vak] [0]
-#    pion_groen.Pos_y = vakjes[p2_vak] [1]
+    pion_groen.Pos_x = vakjes[p2_vak] [0]
+    pion_groen.Pos_y = vakjes[p2_vak] [1]
 
-#    pion_geel.Pos_x = vakjes[p3_vak] [0]
-#    pion_geel.Pos_y = vakjes[p3_vak] [1]
+    pion_geel.Pos_x = vakjes[p3_vak] [0]
+    pion_geel.Pos_y = vakjes[p3_vak] [1]
 
-#    pion_blauw.Pos_x = vakjes[p4_vak] [0]
-#    pion_blauw.Pos_y = vakjes[p4_vak] [1]
+    pion_blauw.Pos_x = vakjes[p4_vak] [0]
+    pion_blauw.Pos_y = vakjes[p4_vak] [1]
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -428,6 +431,11 @@ while True:
                     and mouseX <= dobbel_x+button_width \
                     and mouseY <= dobbel_y+button_height:
                 print("je hebt de Roll Dice knop gedrukt")
+                p1_lp_start         = int(100)
+                p1_lp_start = p1_lp_start + 10
+                lp = p1_lp_start
+                font = pygame.font.Font(None, 36)
+                text = font.render("LP: "+str(lp), 1, (10, 10, 10))
 
                 dice_num = randint(1, 6)
                 p1_vak = p1_vak + dice_num
@@ -538,6 +546,9 @@ while True:
                 and event.key == pygame.K_3:
             print("je hebt op 3 gedrukt")
 
+
+
+
     screen.blit(background,     (int(achtergrond.Pos_x),    int(achtergrond.Pos_y)))
 
     screen.blit(Game_logo,      (int(spellogo.Pos_x),       int(spellogo.Pos_y)))
@@ -570,11 +581,11 @@ while True:
     screen.blit(P3_CP,    (int(p3_cp.Pos_x),      int(p3_cp.Pos_y)))
     screen.blit(P4_CP,    (int(p4_cp.Pos_x),      int(p4_cp.Pos_y)))
 
-    screen.blit(text,(status_rood.Pos_x + 50,status_rood.Pos_y + 5))
-
     screen.blit(instr_button,   (int(instructie.Pos_x),     int(instructie.Pos_y)))
     screen.blit(Rules_button,   (int(spelregels.Pos_x),     int(spelregels.Pos_y)))
     screen.blit(Menu_button,   (int(spelmenu.Pos_x),     int(spelmenu.Pos_y)))
     screen.blit(stop_button,    (int(stopknop.Pos_x),       int(stopknop.Pos_y)))
+
+    screen.blit(text,           (int(tekst.Pos_x),       int(tekst.Pos_y)))
 
     pygame.display.update()
