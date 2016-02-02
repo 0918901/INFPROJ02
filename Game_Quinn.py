@@ -1,7 +1,17 @@
 __author__ = 'quinnjansen'
 import pygame
+import sys
 from pygame.locals import *
 from sys import exit
+
+
+smallfont = pygame.front("comicsansms", 100, 10, 5)
+
+
+Black = 0,0,0
+def score(score):
+    text = smallfont.render("score: "+str(score),True , Black)
+
 
 #afbeeldingen locaties aangeven
 bg        = 'Main/Game/wood.jpg'
@@ -85,15 +95,6 @@ while True:
             #sluit de pygame
             exit()
 
-            invoer = input("CLICK R")
-
-            rolling_dice = "yes"
-
-            if invoer == "r":
-
-                def message_display(text):
-                    largeText = pygame.font.Font("freesandsbold.ttf",155)
-                    textSurf, TextRect = text_object(text, largeText)
 
 
     #locaties op het spelbord
@@ -109,6 +110,8 @@ while True:
     screen.blit(Speler,(850,350))
     screen.blit(red_Pion,(460,530))
     screen.blit(Score,(550,440))
+    screen.blit(text, [0,0])
+
 
     #Scherm vernieuwen bij verandering
     pygame.display.update()
