@@ -1,9 +1,9 @@
 import os
 from random import *
 from sys import exit
-
 import pygame
 import sys
+import copy
 from pygame.locals import *
 
 class Scherm:
@@ -275,15 +275,7 @@ vakjes = [[bx+470,by+5],    [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+1
           [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
           [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
 
-vakjes2= [[bx+470,by+5],    [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+145],    [bx+470,by+180],
-          [bx+470,by+240],  [bx+470,by+295],    [bx+470,by+330],    [bx+470,by+367.5],  [bx+470,by+405],
-          [bx+470,by+470],  [bx+405,by+470],    [bx+367.5,by+470],  [bx+330,by+470],    [bx+295,by+470],
-          [bx+240,by+470],  [bx+180,by+470],    [bx+145,by+470],    [bx+105,by+470],    [bx+67.5,by+470],
-          [bx+5,by+470],    [bx+5,by+405],      [bx+5,by+367.5],    [bx+5,by+330],      [bx+5,by+295],
-          [bx+5,by+240],    [bx+5,by+180],      [bx+5,by+145],      [bx+5,by+105],      [bx+5,by+67.5],
-          [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
-          [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
-
+vakjes2 = list(vakjes)
 
 scherm      = Scherm        (screen_width, screen_height)
 achtergrond = Achtergrond   ('Main/Game/wood.jpg',          scherm.Height,  scherm.Width,       0,            0           )
@@ -430,7 +422,11 @@ p4_vak = 30
 SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
 SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
 
+
+
 while True:
+    if p1_vak >= 40:
+        p1_vak = p1_vak - 40
     if p1_vak >= 1 and p1_vak <= 4:
         print ("leeg vakje")
         SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
@@ -477,7 +473,8 @@ while True:
         SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
         screen.blit(SFC, (sfc_x , sfc_y ))
 
-    if p1_vak >= 1:
+
+    if p1_vak >= 40:
         vakjes.extend(vakjes2)
     if p2_vak >= 11:
         vakjes.extend(vakjes2)
