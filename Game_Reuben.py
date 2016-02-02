@@ -78,8 +78,7 @@ class Statusvak:
         self.Pos_y  =   pos_y
 
 class Scorekaarten:
-    def __init__(self, nummer, image, width, height, pos_x, pos_y):
-        self.Nummer  =  nummer
+    def __init__(self, image, width, height, pos_x, pos_y):
         self.Image  =   image
         self.Width  =   width
         self.Height =   height
@@ -257,6 +256,11 @@ p3_lp_tekst_y             = vlak_rood + 10
 p4_lp_tekst_x             = vlak_x + 50
 p4_lp_tekst_y             = vlak_rood + 10
 
+SC_width        =   200
+SC_height       =   300
+SC_x            =   10
+SC_y            =   10
+
 
 sfc_width           =   200
 sfc_height          =   300
@@ -317,6 +321,8 @@ p4_lp       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height, 
 p4_cp       = Conditiepunten('Main/Elements/cp.png',     cp_width,   cp_height,      p4_cp_x,       p4_cp_y      )
 
 tekst       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      p1_lp_tekst_x, p1_lp_tekst_y  )
+
+sk1_1       = Scorekaarten  ('Cards/SC/SCA.png',        SC_width,      SC_height,       SC_x,           SC_y  )
 
 
 
@@ -402,6 +408,9 @@ Menu_button = pygame.transform.scale(Menu_button, (spelmenu.Width, spelmenu.Heig
 
 stop_button = pygame.image.load                     (stopknop.Image)
 stop_button = pygame.transform.scale(stop_button,   (stopknop.Width, stopknop.Height))
+
+SC1 = pygame.image.load                      (sk1_1.Image)
+SC = pygame.transform.scale(background,     (sk1_1.Height, sk1_1.Width))
 
 pygame.init()
 
@@ -668,6 +677,8 @@ while True:
     screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 125)))
     screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 250)))
     screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 375)))
+
+    screen.blit(SC,           (int(sk1_1.Pos_x),          int(sk1_1.Pos_y)))
 
 
     pygame.display.update()
