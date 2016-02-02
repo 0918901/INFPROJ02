@@ -311,28 +311,6 @@ while True:
                     #SFC = pygame.transform.scale(SFC6, (sfc_width, sfc_height))
                     print ("je hebt 6 gegooid")
 
-                if red_Pion == fight_vak and player1_choice == 1:
-                    lp - 10
-
-                elif player1_choice == 2:
-                    lp - 20
-
-                elif player1_choice == 3:
-                    lp - 30
-
-                elif player1_choice == 4:
-                    lp - 40
-
-                elif player1_choice == 5:
-                     lp - 50
-
-                elif player1_choice == 6:
-                    lp - 60
-
-
-
-
-
     # locaties op het spelbord
     screen.blit(BG, (0, 0))
     #screen.blit(lifepoints, (20, 15))
