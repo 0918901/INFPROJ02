@@ -23,6 +23,7 @@ def car(x,y):
 
 pygame.display.update()
 # Loop until the user clicks the close button.
+
 done = False
 
 # Used to manage how fast the screen updates
@@ -63,9 +64,9 @@ while not done:
         elif event.type == pygame.KEYUP:
             # If it is an arrow key, reset vector back to zero
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                x_speed = 1
+                x_speed = 0
             elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                y_speed = 1
+                y_speed = 0
 
     # --- Game Logic
     pygame.mouse.set_visible(0)
