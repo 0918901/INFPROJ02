@@ -71,7 +71,7 @@ def Intro():
     spellogo    = Knoppen       ('Button/SM/logo.png',          logo_width,     logo_height,    logo_x,     logo_y   )
     spelmenu    = Knoppen       ('Button/SM/menu.png',          menu_width,     menu_height,    menu_x,     menu_y   )
 
-    startknop   = Knoppen       ('Button/SM/newgame.png',       button_width,   button_height,  start_x,    start_y  )
+    startknop   = Knoppen       ('Button/SM/playgame.png',       button_width,   button_height,  start_x,    start_y  )
     instructie  = Knoppen       ('Button/SM/instructions.png',  button_width,   button_height,  instr_x,    instr_y  )
     regels      = Knoppen       ('Button/SM/gamerules.png',     button_width,   button_height,  regels_x,   regels_y  )
     stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,  stop_x,     stop_y   )
