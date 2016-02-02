@@ -1,8 +1,9 @@
+import os
 from random import *
 from sys import exit
-
 import pygame
 import sys
+import copy
 from pygame.locals import *
 
 class Scherm:
@@ -125,6 +126,25 @@ class Snelkoppelingen:
         self.Pos_x  =   pos_x
         self.Pos_y  =   pos_y
 
+SFCA  = 'Cards/SFC/SFCA.png'
+SFC1  = 'Cards/SFC/SFC1.png'
+SFC2  = 'Cards/SFC/SFC2.png'
+SFC3  = 'Cards/SFC/SFC3.png'
+SFC4  = 'Cards/SFC/SFC4.png'
+SFC5  = 'Cards/SFC/SFC5.png'
+SFC6  = 'Cards/SFC/SFC6.png'
+SFC7  = 'Cards/SFC/SFC7.png'
+SFC8  = 'Cards/SFC/SFC8.png'
+SFC9  = 'Cards/SFC/SFC9.png'
+SFC10  = 'Cards/SFC/SFC10.png'
+SFC11  = 'Cards/SFC/SFC11.png'
+SFC12  = 'Cards/SFC/SFC12.png'
+SFC13  = 'Cards/SFC/SFC13.png'
+SFC14  = 'Cards/SFC/SFC14.png'
+SFC15  = 'Cards/SFC/SFC15.png'
+SFC16  = 'Cards/SFC/SFC16.png'
+SFC17  = 'Cards/SFC/SFC17.png'
+SFC18  = 'Cards/SFC/SFC18.png'
 
 screen_width        = 768
 screen_height       = 1024
@@ -208,7 +228,7 @@ p3_cp_x                = vlak_x
 p3_cp_y                = vlak_rood + 300
 
 p4_cp_x                = vlak_x
-p4_cp_y                = vlak_rood + 424
+p4_cp_y                = vlak_rood + 425
 
 pion_width          = 25
 pion_height         = 25
@@ -225,11 +245,23 @@ pion_geel_y         = bord_y + 495 - pion_height
 pion_blauw_x        = bord_x + 5
 pion_blauw_y        = bord_y + 5
 
-tekst_x             = vlak_x + 50
-tekst_y             = vlak_rood + 10
+p1_lp_tekst_x             = vlak_x + 50
+p1_lp_tekst_y             = vlak_rood + 10
+
+p2_lp_tekst_x             = vlak_x + 50
+p2_lp_tekst_y             = vlak_rood + 10
+
+p3_lp_tekst_x             = vlak_x + 50
+p3_lp_tekst_y             = vlak_rood + 10
+
+p4_lp_tekst_x             = vlak_x + 50
+p4_lp_tekst_y             = vlak_rood + 10
 
 
-
+sfc_width           =   200
+sfc_height          =   300
+sfc_x               =   400
+sfc_y               =   300
 
 bx = bord_x
 by = bord_y
@@ -243,15 +275,7 @@ vakjes = [[bx+470,by+5],    [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+1
           [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
           [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
 
-vakjes2= [[bx+470,by+5],    [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+145],    [bx+470,by+180],
-          [bx+470,by+240],  [bx+470,by+295],    [bx+470,by+330],    [bx+470,by+367.5],  [bx+470,by+405],
-          [bx+470,by+470],  [bx+405,by+470],    [bx+367.5,by+470],  [bx+330,by+470],    [bx+295,by+470],
-          [bx+240,by+470],  [bx+180,by+470],    [bx+145,by+470],    [bx+105,by+470],    [bx+67.5,by+470],
-          [bx+5,by+470],    [bx+5,by+405],      [bx+5,by+367.5],    [bx+5,by+330],      [bx+5,by+295],
-          [bx+5,by+240],    [bx+5,by+180],      [bx+5,by+145],      [bx+5,by+105],      [bx+5,by+67.5],
-          [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
-          [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
-
+vakjes2 = list(vakjes)
 
 scherm      = Scherm        (screen_width, screen_height)
 achtergrond = Achtergrond   ('Main/Game/wood.jpg',          scherm.Height,  scherm.Width,       0,            0           )
@@ -292,7 +316,7 @@ p3_cp       = Conditiepunten('Main/Elements/cp.png',     cp_width,   cp_height, 
 p4_lp       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      p4_lp_x,       p4_lp_y      )
 p4_cp       = Conditiepunten('Main/Elements/cp.png',     cp_width,   cp_height,      p4_cp_x,       p4_cp_y      )
 
-tekst       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      tekst_x,       tekst_y     )
+tekst       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      p1_lp_tekst_x, p1_lp_tekst_y  )
 
 
 
@@ -381,7 +405,7 @@ stop_button = pygame.transform.scale(stop_button,   (stopknop.Width, stopknop.He
 
 pygame.init()
 
-p1_lp_start         = int(10)
+p1_lp_start         = int(100)
 font = pygame.font.Font(None, 36)
 text = font.render("LP: "+str(p1_lp_start), 1, (10, 10, 10))
 
@@ -395,8 +419,62 @@ p2_vak = 10
 p3_vak = 20
 p4_vak = 30
 
+SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+
+
+
 while True:
-    if p1_vak >= 1:
+    if p1_vak >= 40:
+        p1_vak = p1_vak - 40
+    if p1_vak >= 1 and p1_vak <= 4:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if p1_vak ==  5:
+        print ("je bent in een gevecht!!")
+        SFC1 = pygame.image.load(os.path.join('Cards/SFC/SFC1.png'))
+        SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if p1_vak >= 6 and p1_vak <= 14:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if p1_vak == 15:
+        print ("je bent in een gevecht!!")
+        SFC2 = pygame.image.load(os.path.join('Cards/SFC/SFC2.png'))
+        SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if p1_vak >= 16 and p1_vak <= 24:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if p1_vak == 25:
+        print ("je bent in een gevecht!!")
+        SFC3 = pygame.image.load(os.path.join('Cards/SFC/SFC3.png'))
+        SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if p1_vak >= 26 and p1_vak <= 34:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if p1_vak == 35:
+        print ("je bent in een gevecht!!")
+        SFC4 = pygame.image.load(os.path.join('Cards/SFC/SFC4.png'))
+        SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if p1_vak >= 36 and p1_vak <= 40:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+
+
+    if p1_vak >= 40:
         vakjes.extend(vakjes2)
     if p2_vak >= 11:
         vakjes.extend(vakjes2)
@@ -405,17 +483,17 @@ while True:
     if p4_vak >= 31:
         vakjes.extend(vakjes2)
 
-    pion_rood.Pos_x = vakjes[p1_vak] [0]
-    pion_rood.Pos_y = vakjes[p1_vak] [1]
+    pion_rood.Pos_x = vakjes[p1_vak] [0] or vakjes2[p1_vak] [0]
+    pion_rood.Pos_y = vakjes[p1_vak] [1] or vakjes2[p1_vak] [1]
 
-    pion_groen.Pos_x = vakjes[p2_vak] [0]
-    pion_groen.Pos_y = vakjes[p2_vak] [1]
+    pion_groen.Pos_x = vakjes[p2_vak] [0] or vakjes2[p1_vak] [0]
+    pion_groen.Pos_y = vakjes[p2_vak] [1] or vakjes2[p1_vak] [1]
 
-    pion_geel.Pos_x = vakjes[p3_vak] [0]
-    pion_geel.Pos_y = vakjes[p3_vak] [1]
+    pion_geel.Pos_x = vakjes[p3_vak] [0] or vakjes2[p1_vak] [0]
+    pion_geel.Pos_y = vakjes[p3_vak] [1] or vakjes2[p1_vak] [1]
 
-    pion_blauw.Pos_x = vakjes[p4_vak] [0]
-    pion_blauw.Pos_y = vakjes[p4_vak] [1]
+    pion_blauw.Pos_x = vakjes[p4_vak] [0] or vakjes2[p1_vak] [0]
+    pion_blauw.Pos_y = vakjes[p4_vak] [1] or vakjes2[p1_vak] [1]
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -431,9 +509,9 @@ while True:
                     and mouseX <= dobbel_x+button_width \
                     and mouseY <= dobbel_y+button_height:
                 print("je hebt de Roll Dice knop gedrukt")
-                p1_lp_start         = int(100)
-                p1_lp_start = p1_lp_start + 10
-                lp = p1_lp_start
+
+                p1_lp_start = int(p1_lp_start) + int(10)
+                lp = int(p1_lp_start)
                 font = pygame.font.Font(None, 36)
                 text = font.render("LP: "+str(lp), 1, (10, 10, 10))
 
@@ -583,9 +661,13 @@ while True:
 
     screen.blit(instr_button,   (int(instructie.Pos_x),     int(instructie.Pos_y)))
     screen.blit(Rules_button,   (int(spelregels.Pos_x),     int(spelregels.Pos_y)))
-    screen.blit(Menu_button,   (int(spelmenu.Pos_x),     int(spelmenu.Pos_y)))
+    screen.blit(Menu_button,    (int(spelmenu.Pos_x),       int(spelmenu.Pos_y)))
     screen.blit(stop_button,    (int(stopknop.Pos_x),       int(stopknop.Pos_y)))
+    screen.blit(SFC,            (int(sfc_x),                int(sfc_y)))
+    screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y)))
+    screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 125)))
+    screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 250)))
+    screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 375)))
 
-    screen.blit(text,           (int(tekst.Pos_x),       int(tekst.Pos_y)))
 
     pygame.display.update()
