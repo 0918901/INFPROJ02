@@ -1,9 +1,9 @@
 import os
 from random import *
 from sys import exit
-
 import pygame
 import sys
+import copy
 from pygame.locals import *
 
 class Scherm:
@@ -78,8 +78,7 @@ class Statusvak:
         self.Pos_y  =   pos_y
 
 class Scorekaarten:
-    def __init__(self, nummer, image, width, height, pos_x, pos_y):
-        self.Nummer  =  nummer
+    def __init__(self, image, width, height, pos_x, pos_y):
         self.Image  =   image
         self.Width  =   width
         self.Height =   height
@@ -257,6 +256,11 @@ p3_lp_tekst_y             = vlak_rood + 10
 p4_lp_tekst_x             = vlak_x + 50
 p4_lp_tekst_y             = vlak_rood + 10
 
+SC_width        =   200
+SC_height       =   300
+SC_x            =   10
+SC_y            =   10
+
 
 sfc_width           =   200
 sfc_height          =   300
@@ -275,15 +279,7 @@ vakjes = [[bx+470,by+5],    [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+1
           [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
           [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
 
-vakjes2= [[bx+470,by+5],    [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+145],    [bx+470,by+180],
-          [bx+470,by+240],  [bx+470,by+295],    [bx+470,by+330],    [bx+470,by+367.5],  [bx+470,by+405],
-          [bx+470,by+470],  [bx+405,by+470],    [bx+367.5,by+470],  [bx+330,by+470],    [bx+295,by+470],
-          [bx+240,by+470],  [bx+180,by+470],    [bx+145,by+470],    [bx+105,by+470],    [bx+67.5,by+470],
-          [bx+5,by+470],    [bx+5,by+405],      [bx+5,by+367.5],    [bx+5,by+330],      [bx+5,by+295],
-          [bx+5,by+240],    [bx+5,by+180],      [bx+5,by+145],      [bx+5,by+105],      [bx+5,by+67.5],
-          [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
-          [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
-
+vakjes2 = list(vakjes)
 
 scherm      = Scherm        (screen_width, screen_height)
 achtergrond = Achtergrond   ('Main/Game/wood.jpg',          scherm.Height,  scherm.Width,       0,            0           )
@@ -325,6 +321,8 @@ p4_lp       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height, 
 p4_cp       = Conditiepunten('Main/Elements/cp.png',     cp_width,   cp_height,      p4_cp_x,       p4_cp_y      )
 
 tekst       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      p1_lp_tekst_x, p1_lp_tekst_y  )
+
+sk1_1       = Scorekaarten  ('Cards/SC/SCA.png',        SC_width,      SC_height,       SC_x,           SC_y  )
 
 
 
@@ -411,6 +409,9 @@ Menu_button = pygame.transform.scale(Menu_button, (spelmenu.Width, spelmenu.Heig
 stop_button = pygame.image.load                     (stopknop.Image)
 stop_button = pygame.transform.scale(stop_button,   (stopknop.Width, stopknop.Height))
 
+SC1 = pygame.image.load                      (sk1_1.Image)
+SC = pygame.transform.scale(background,     (sk1_1.Height, sk1_1.Width))
+
 pygame.init()
 
 p1_lp_start         = int(100)
@@ -430,7 +431,11 @@ p4_vak = 30
 SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
 SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
 
+
+
 while True:
+    if p1_vak >= 40:
+        p1_vak = p1_vak - 40
     if p1_vak >= 1 and p1_vak <= 4:
         print ("leeg vakje")
         SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
@@ -477,7 +482,8 @@ while True:
         SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
         screen.blit(SFC, (sfc_x , sfc_y ))
 
-    if p1_vak >= 1:
+
+    if p1_vak >= 40:
         vakjes.extend(vakjes2)
     if p2_vak >= 11:
         vakjes.extend(vakjes2)
@@ -671,6 +677,8 @@ while True:
     screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 125)))
     screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 250)))
     screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 375)))
+
+    screen.blit(SC,           (int(sk1_1.Pos_x),          int(sk1_1.Pos_y)))
 
 
     pygame.display.update()
