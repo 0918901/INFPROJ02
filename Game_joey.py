@@ -11,7 +11,6 @@ bg = 'Main/Game/wood.jpg'
 board = 'Main/Game/board.png'
 lp = 'Button/GM/levenspunten.png'
 cp = 'Button/GM/conditiepunten.png'
-
 #dobbelsteen
 ds = 'Main/Dice/D1.png'
 ds2 = 'Main/Dice/D2.png'
@@ -279,11 +278,15 @@ while True:
                 import GameStartMenu_Reuben
 
             if mouseX >=sound_x and mouseY>= sound_y and mouseX<=(sound_x+sound_width) and mouseY<= (sound_y+sound_height):
-            #mouseX >=soundOff_x and mouseY>= soundOff_y and mouseX<=(soundOff_x+soundOff_width) and mouseY<= (soundOff_y+soundOff_height):
-                SoundOff=pygame.image.load(soundOff)
-                pygame.mixer.music.play()
-                SoundOff = pygame.transform.scale(SoundOff,(soundOff_width,soundOff_height))
-                pygame.mixer.music.stop()
+                geluid = random.randint(1,2)
+                if geluid == 1:
+                    Sound=pygame.image.load(sound)
+                    Sound = pygame.transform.scale(Sound,(sound_width,sound_height))
+                    pygame.mixer.music.play()
+                if geluid == 2:
+                    SoundOff=pygame.image.load(soundOff)
+                    Sound = pygame.transform.scale(SoundOff,(soundOff_width,soundOff_height))
+                    pygame.mixer.music.stop()
 
 
 
@@ -348,7 +351,6 @@ while True:
     #screen.blit(lifepoints, (20, 15))
     screen.blit(gameboard, (bx, by))
     #screen.blit(CP, (300, 15))
-    screen.blit(SoundOff,(soundOff_x,soundOff_y))
     screen.blit(Sound,(sound_x,sound_y))
     screen.blit(Quit, (close_x, close_y))
     screen.blit(Help, (hulp_x, hulp_y))
