@@ -221,6 +221,9 @@ vakjes = [[bx+470,by+10],   [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+1
           [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
           [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
 
+# Coördinaten fight vakken
+fight_vak = [[bx+470,by+240], [bx+240,by+470], [bx+5,by+240], [bx+240,by+5]]
+
 # pion positie
 # pion positie
 vak = 0
@@ -228,9 +231,7 @@ print(vakjes[vak] [0], vakjes [vak] [1])
 
 roodPion_x = vakjes[vak] [0]
 roodPion_y = vakjes[vak] [1]
-pygame.mixer.music.load('Monopoly - NES - Auction.mp3')
-pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
-pygame.mixer.music.play()
+
 while True:
     # ophalen van pygame event
     for event in pygame.event.get():
@@ -310,7 +311,25 @@ while True:
                     #SFC = pygame.transform.scale(SFC6, (sfc_width, sfc_height))
                     print ("je hebt 6 gegooid")
 
-                if vakjes ==[5]:
+                if red_Pion == fight_vak and player1_choice == 1:
+                    lp - 10
+
+                elif player1_choice == 2:
+                    lp - 20
+
+                elif player1_choice == 3:
+                    lp - 30
+
+                elif player1_choice == 4:
+                    lp - 40
+
+                elif player1_choice == 5:
+                     lp - 50
+
+                elif player1_choice == 6:
+                    lp - 60
+
+
 
 
 
