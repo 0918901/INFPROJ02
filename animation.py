@@ -3,13 +3,13 @@ import pygame
 
 pygame.init()
 
-screen = pygame.display.set_mode((800,600))
+screen = pygame.display.set_mode((800,800))
 
 pygame.display.set_caption("Animation")
 terugNaarMenu               = 'Main/instructions/Kruis2.png'
-tryAgain_knop               = 'Main/Game/tryagain_button.png'
+tryAgain_knop               = 'Main/Game/winKnop.png'
 # spelbord sprites
-bs = 'Main/Game/test spelbord.png'
+bs = 'Main/Game/achtergrondWinLose.png'
 
 clock = pygame.time.Clock()
 
@@ -17,15 +17,17 @@ clock = pygame.time.Clock()
 RodeKnopje_width        = 30
 RodeKnopje_height       = 25
 
-tk_x = 918
-tk_y = 49
+#positie van terugKnop
+tk_x = 970
+tk_y = 38
 
 #Grootte van tryAgainknop aangeven
-tryKnopje_width        = 100
+tryKnopje_width        = 150
 try_height             = 50
 
-try_x = 755
-try_y = 440
+#positie van tryAgainKnop
+try_x = 800
+try_y = 540
 
 #Play knop aanroepen en vervormen naar aangegeven grootte [boven aangegeven](regel 18-19)
 terug_knop = pygame.image.load(terugNaarMenu)
@@ -36,10 +38,10 @@ tryy = pygame.image.load(tryAgain_knop)
 tryy = pygame.transform.scale(tryy, (tryKnopje_width , try_height))
 
 
-w1 = pygame.image.load("Main/Game/winRandBlue.jpg")
-w1 = pygame.transform.scale(w1, (850, 600))
-w2 = pygame.image.load("Main/Game/winRandRed.jpg")
-w2 = pygame.transform.scale(w2, (850, 600))
+w1 = pygame.image.load("Main/Game/winSituatieBlauw.png")
+w1 = pygame.transform.scale(w1, (1024, 728))
+w2 = pygame.image.load("Main/Game/winSituatieRed.png")
+w2 = pygame.transform.scale(w2, (1024, 728))
 
 
 screen = pygame.display.set_mode((1024, 728))
@@ -61,13 +63,13 @@ while gameLoop:
 
     if (winnerCurrentImage==1):
 
-        screen.blit(w1, (100,50))
+        screen.blit(w1, (0,0))
         screen.blit(terug_knop,(tk_x,tk_y))
         screen.blit(tryy,(try_x,try_y))
 
     if (winnerCurrentImage==2):
 
-        screen.blit(w2, (100,50))
+        screen.blit(w2, (0,0))
         screen.blit(terug_knop,(tk_x,tk_y))
         screen.blit(tryy,(try_x,try_y))
 
