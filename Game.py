@@ -136,7 +136,7 @@ def Intro():
 
 
     music = 1
-    pygame.mixer.music.load('Sound/game2.mp3')
+    pygame.mixer.music.load('Sound/startmenu.mp3')
     pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
     if music == 1:
         pygame.mixer.music.play()
