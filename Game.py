@@ -563,7 +563,7 @@ def Game():
     spellogo    = afbeeldingen  ('Button/SM/logo.png',          logo_width,     logo_height,        logo_x,       logo_y      )
     spelbord    = Knoppen       ('Main/Game/board2.png',        bord_width,     bord_height,        bord_x,       bord_y      )
 
-    dobbelen    = Knoppen       ('Button/GM/dobbel.png',        button2_width,   button2_height,      dobbel_x,     dobbel_y    )
+    dobbelen    = Knoppen       ('Button/GM/roll.png',        button2_width,   button2_height,      dobbel_x,     dobbel_y    )
     dobbelen2   = Knoppen       ('Button/GM/fight.png',        button2_width,   button2_height,      dobbel2_x,     dobbel2_y    )
     optie1      = Knoppen       ('Button/GM/optie1.png',        button_width,   button_height,      opt1_x,       opt1_y    )
     optie2      = Knoppen       ('Button/GM/optie2.png',        button_width,   button_height,      opt2_x,       opt2_y    )
@@ -761,11 +761,14 @@ def Game():
         if p1_vak >= 40:
             p1_vak = p1_vak - 40
 
-        if p1_vak >= 1 and p1_vak <= 4:
+        if p1_vak >= 0 and p1_vak <= 4:
 
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
             SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
             screen.blit(SFC, (sfc_x , sfc_y ))
+            Sk1_0 = pygame.image.load                     (sk1_0.Image)
+            Sk1 = pygame.transform.scale(Sk1_0,   (sk1_0.Width, sk1_0.Height))
+
         if p1_vak ==  5:
             if dice_num2 == 1:
                 aanval_sfc = 10
@@ -784,10 +787,12 @@ def Game():
             SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
             screen.blit(SFC, (sfc_x , sfc_y ))
         if p1_vak >= 6 and p1_vak <= 14:
-
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
             SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            Sk1_0 = pygame.image.load                     (sk1_0.Image)
+            Sk1 = pygame.transform.scale(Sk1_0,   (sk1_0.Width, sk1_0.Height))
             screen.blit(SFC, (sfc_x , sfc_y ))
+
         if p1_vak == 15:
             if dice_num2 == 1:
                 aanval_sfc = 15
@@ -809,6 +814,9 @@ def Game():
 
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
             SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            Sk1_0 = pygame.image.load                     (sk1_0.Image)
+            Sk1 = pygame.transform.scale(Sk1_0,   (sk1_0.Width, sk1_0.Height))
+
             screen.blit(SFC, (sfc_x , sfc_y ))
         if p1_vak == 25:
             if dice_num2 == 1:
@@ -827,10 +835,14 @@ def Game():
             SFC3 = pygame.image.load(os.path.join('Cards/SFC/SFC3.png'))
             SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
             screen.blit(SFC, (sfc_x , sfc_y ))
+
         if p1_vak >= 26 and p1_vak <= 34:
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
             SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            Sk1_0 = pygame.image.load                     (sk1_0.Image)
+            Sk1 = pygame.transform.scale(Sk1_0,   (sk1_0.Width, sk1_0.Height))
             screen.blit(SFC, (sfc_x , sfc_y ))
+
         if p1_vak == 35:
             if dice_num2 == 1:
                 aanval_sfc = 10
@@ -848,10 +860,12 @@ def Game():
             SFC4 = pygame.image.load(os.path.join('Cards/SFC/SFC4.png'))
             SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
             screen.blit(SFC, (sfc_x , sfc_y ))
-        if p1_vak >= 36 and p1_vak <= 40:
 
+        if p1_vak >= 36 and p1_vak <= 40:
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
             SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            Sk1_0 = pygame.image.load                     (sk1_0.Image)
+            Sk1 = pygame.transform.scale(Sk1_0,   (sk1_0.Width, sk1_0.Height))
             screen.blit(SFC, (sfc_x , sfc_y ))
 
         if p1_vak >= 40:
