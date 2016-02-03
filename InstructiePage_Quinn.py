@@ -7,7 +7,7 @@ from pygame import *
 
 #afbeeldingen inladen
 background_image   = 'Main/Instructions/SH.jpg'
-terug               = 'Main/instructions/Kruis2.png'
+terug              = 'Main/instructions/Kruis2.png'
 
 #Grootte van scherm aangeven
 screen_width        = 768
