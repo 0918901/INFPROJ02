@@ -64,12 +64,24 @@ def Intro():
     menu_y              = 200
     menu_x              = 50
 
+    logo2_width          = 600
+    logo2_height         = 200
+    logo2_y              = 0
+    logo2_x              = 250
+
+    menu2_width          = 400
+    menu2_height         = 150
+    menu2_y              = 200
+    menu2_x              = 50
+
 
     scherm      = Scherm        (screen_width, screen_height)
     achtergrond = Achtergrond   ('Main/Menu/bg2.jpg',           scherm.Height,  scherm.Width,   0,          0)
 
     spellogo    = Knoppen       ('Button/SM/logo.png',          logo_width,     logo_height,    logo_x,     logo_y   )
+    spellogo2    = Knoppen       ('Button/SM/logo2.png',          logo2_width,     logo2_height,    logo2_x,     logo2_y   )
     spelmenu    = Knoppen       ('Button/SM/menu.png',          menu_width,     menu_height,    menu_x,     menu_y   )
+    spelmenu2    = Knoppen       ('Button/SM/menu2.png',          menu2_width,     menu2_height,    menu2_x,     menu2_y   )
 
     startknop   = Knoppen       ('Button/SM/newgame.png',       button_width,   button_height,  start_x,    start_y  )
     instructie  = Knoppen       ('Button/SM/instructions.png',  button_width,   button_height,  instr_x,    instr_y  )
@@ -88,6 +100,12 @@ def Intro():
     Game_menu = pygame.image.load                       (spelmenu.Image)
     Game_menu = pygame.transform.scale(Game_menu,       (spelmenu.Width, spelmenu.Height))
 
+    Game_logo2 = pygame.image.load                       (spellogo2.Image)
+    Game_logo2 = pygame.transform.scale(Game_logo2,       (spellogo2.Width, spellogo2.Height))
+
+    Game_menu2 = pygame.image.load                       (spelmenu2.Image)
+    Game_menu2 = pygame.transform.scale(Game_menu2,       (spelmenu2.Width, spelmenu2.Height))
+
     play_button = pygame.image.load                     (startknop.Image)
     play_button = pygame.transform.scale(play_button,   (startknop.Width, startknop.Height))
 
@@ -100,6 +118,8 @@ def Intro():
     stop_button = pygame.image.load                     (stopknop.Image)
     stop_button = pygame.transform.scale(stop_button,   (stopknop.Width, stopknop.Height))
 
+    clock = pygame.time.Clock()
+    LogoMenuCurrentImage = 1
 
     while True:
         for event in pygame.event.get():
@@ -107,7 +127,27 @@ def Intro():
                 pygame.quit()
                 exit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
+        if (LogoMenuCurrentImage==1):
+
+                screen.blit(Game_logo2,      (int(spellogo2.Pos_x),       int(spellogo2.Pos_y)))
+                screen.blit(Game_menu2,      (int(spelmenu2.Pos_x),       int(spelmenu2.Pos_y)))
+
+        if (LogoMenuCurrentImage==2):
+
+                screen.blit(Game_logo,      (int(spellogo.Pos_x),       int(spellogo.Pos_y)))
+                screen.blit(Game_menu,      (int(spelmenu.Pos_x),       int(spelmenu.Pos_y)))
+
+        if (LogoMenuCurrentImage==2):
+
+                LogoMenuCurrentImage=1
+        else:
+
+            LogoMenuCurrentImage+=1;
+
+        pygame.display.flip()
+        clock.tick(5)
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
                 (mouseX, mouseY) = pygame.mouse.get_pos()
                 print ("X =",mouseX, "Y =",mouseY)
 
@@ -141,27 +181,26 @@ def Intro():
                     pygame.quit()
                     exit()
 
-            if event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_ESCAPE:
-                print("je hebt het spel afgesloten")
-                pygame.quit()
-                exit()
+                if event.type == pygame.KEYDOWN \
+                        and event.key == pygame.K_ESCAPE:
+                    print("je hebt het spel afgesloten")
+                    pygame.quit()
+                    exit()
 
-            if event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_1:
-                print("je hebt op 1 gedrukt")
+                if event.type == pygame.KEYDOWN \
+                        and event.key == pygame.K_1:
+                    print("je hebt op 1 gedrukt")
 
-            if event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_2:
-                print("je hebt op 2 gedrukt")
+                if event.type == pygame.KEYDOWN \
+                        and event.key == pygame.K_2:
+                    print("je hebt op 2 gedrukt")
 
-            if event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_3:
-                print("je hebt op 3 gedrukt")
+                if event.type == pygame.KEYDOWN \
+                        and event.key == pygame.K_3:
+                    print("je hebt op 3 gedrukt")
 
         screen.blit(background,     (int(achtergrond.Pos_x),    int(achtergrond.Pos_y)))
-        screen.blit(Game_logo,      (int(spellogo.Pos_x),       int(spellogo.Pos_y)))
-        screen.blit(Game_menu,      (int(spelmenu.Pos_x),       int(spelmenu.Pos_y)))
+
         screen.blit(play_button,    (int(startknop.Pos_x),      int(startknop.Pos_y)))
         screen.blit(instr_button,   (int(instructie.Pos_x),     int(instructie.Pos_y)))
         screen.blit(rules_button,   (int(regels.Pos_x),         int(regels.Pos_y)))
@@ -824,6 +863,9 @@ def Instructions():
             if event.type == QUIT:
                 pygame.quit()
                 exit()
+
+
+
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 (mouseX, mouseY) = pygame.mouse.get_pos()
