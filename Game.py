@@ -751,7 +751,7 @@ def Game():
     SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
 
     music = 1
-    pygame.mixer.music.load(os.path.join('Sound/game2.mp3'))
+    pygame.mixer.music.load(os.path.join('Sound/startmenu.mp3'))
     pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
     if music == 1:
         pygame.mixer.music.play()
