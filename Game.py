@@ -1,7 +1,9 @@
+import os
 from random import *
 from sys import exit
 import pygame
 import sys
+import copy
 from pygame.locals import *
 
 def Intro():
@@ -54,6 +56,15 @@ def Intro():
     stop_x              = 50
     stop_y              = 650
 
+    speler1_x           = 450
+    speler1_y           = 350
+    speler2_x           = 450
+    speler2_y           = 450
+
+    human_x             = 150
+    human_y             = 250
+
+
     logo_width          = 600
     logo_height         = 200
     logo_y              = 0
@@ -71,10 +82,16 @@ def Intro():
     spellogo    = Knoppen       ('Button/SM/logo.png',          logo_width,     logo_height,    logo_x,     logo_y   )
     spelmenu    = Knoppen       ('Button/SM/menu.png',          menu_width,     menu_height,    menu_x,     menu_y   )
 
-    startknop   = Knoppen       ('Button/SM/playgame.png',       button_width,   button_height,  start_x,    start_y  )
+    startknop   = Knoppen       ('Button/SM/newgame.png',       button_width,   button_height,  start_x,    start_y  )
     instructie  = Knoppen       ('Button/SM/instructions.png',  button_width,   button_height,  instr_x,    instr_y  )
     regels      = Knoppen       ('Button/SM/gamerules.png',     button_width,   button_height,  regels_x,   regels_y  )
     stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,  stop_x,     stop_y   )
+
+    stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,  stop_x,     stop_y   )
+    stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,  stop_x,     stop_y   )
+
+    speler1    = Knoppen       ('Button/SM/player1.png',      button_width,   button_height,  speler1_x,     speler1_y   )
+    speler2    = Knoppen       ('Button/SM/player2.png',      button_width,   button_height,  speler2_x,     speler2_y   )
 
 
     screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),DOUBLEBUF,32)
@@ -100,6 +117,11 @@ def Intro():
     stop_button = pygame.image.load                     (stopknop.Image)
     stop_button = pygame.transform.scale(stop_button,   (stopknop.Width, stopknop.Height))
 
+    Speler1 = pygame.image.load                         (speler1.Image)
+    Speler1 = pygame.transform.scale(Speler1,            (speler1.Width, speler1.Height))
+
+    Speler2 = pygame.image.load                         (speler2.Image)
+    Speler2 = pygame.transform.scale(Speler2,            (speler2.Width, speler2.Height))
 
     while True:
         for event in pygame.event.get():
@@ -111,6 +133,7 @@ def Intro():
                 (mouseX, mouseY) = pygame.mouse.get_pos()
                 print ("X =",mouseX, "Y =",mouseY)
 
+
                 if mouseX >= start_x \
                         and mouseY >= start_y \
                         and mouseX <= start_x+button_width \
@@ -118,6 +141,19 @@ def Intro():
                     print("je hebt de New Game knop gevonden")
                     Game()
 
+                if mouseX >= speler1_x \
+                        and mouseY >= speler1_y \
+                        and mouseX <= speler1_x+button_width \
+                        and mouseY <= speler1_y+button_height:
+                    print("je hebt de speler1 knop gevonden")
+                    Game()
+
+                if mouseX >= speler2_x \
+                        and mouseY >= speler2_y \
+                        and mouseX <= speler2_x+button_width \
+                        and mouseY <= speler2_y+button_height:
+                    print("je hebt de speler2 knop gevonden")
+                    Game()
 
                 if mouseX >= instr_x \
                         and mouseY >= instr_y \
@@ -166,6 +202,8 @@ def Intro():
         screen.blit(instr_button,   (int(instructie.Pos_x),     int(instructie.Pos_y)))
         screen.blit(rules_button,   (int(regels.Pos_x),         int(regels.Pos_y)))
         screen.blit(stop_button,    (int(stopknop.Pos_x),       int(stopknop.Pos_y)))
+        screen.blit(Speler1,        (int(speler1.Pos_x),        int(speler1.Pos_y)))
+        screen.blit(Speler2,        (int(speler2.Pos_x),        int(speler2.Pos_y)))
 
         pygame.display.update()
 
@@ -242,8 +280,7 @@ def Game():
             self.Pos_y  =   pos_y
 
     class Scorekaarten:
-        def __init__(self, nummer, image, width, height, pos_x, pos_y):
-            self.Nummer  =  nummer
+        def __init__(self, image, width, height, pos_x, pos_y):
             self.Image  =   image
             self.Width  =   width
             self.Height =   height
@@ -290,6 +327,25 @@ def Game():
             self.Pos_x  =   pos_x
             self.Pos_y  =   pos_y
 
+    SFCA  = 'Cards/SFC/SFCA.png'
+    SFC1  = 'Cards/SFC/SFC1.png'
+    SFC2  = 'Cards/SFC/SFC2.png'
+    SFC3  = 'Cards/SFC/SFC3.png'
+    SFC4  = 'Cards/SFC/SFC4.png'
+    SFC5  = 'Cards/SFC/SFC5.png'
+    SFC6  = 'Cards/SFC/SFC6.png'
+    SFC7  = 'Cards/SFC/SFC7.png'
+    SFC8  = 'Cards/SFC/SFC8.png'
+    SFC9  = 'Cards/SFC/SFC9.png'
+    SFC10  = 'Cards/SFC/SFC10.png'
+    SFC11  = 'Cards/SFC/SFC11.png'
+    SFC12  = 'Cards/SFC/SFC12.png'
+    SFC13  = 'Cards/SFC/SFC13.png'
+    SFC14  = 'Cards/SFC/SFC14.png'
+    SFC15  = 'Cards/SFC/SFC15.png'
+    SFC16  = 'Cards/SFC/SFC16.png'
+    SFC17  = 'Cards/SFC/SFC17.png'
+    SFC18  = 'Cards/SFC/SFC18.png'
 
     screen_width        = 768
     screen_height       = 1024
@@ -373,7 +429,7 @@ def Game():
     p3_cp_y                = vlak_rood + 300
 
     p4_cp_x                = vlak_x
-    p4_cp_y                = vlak_rood + 424
+    p4_cp_y                = vlak_rood + 425
 
     pion_width          = 25
     pion_height         = 25
@@ -390,11 +446,28 @@ def Game():
     pion_blauw_x        = bord_x + 5
     pion_blauw_y        = bord_y + 5
 
-    tekst_x             = vlak_x + 50
-    tekst_y             = vlak_rood + 10
+    p1_lp_tekst_x             = vlak_x + 50
+    p1_lp_tekst_y             = vlak_rood + 10
+
+    p2_lp_tekst_x             = vlak_x + 50
+    p2_lp_tekst_y             = vlak_rood + 10
+
+    p3_lp_tekst_x             = vlak_x + 50
+    p3_lp_tekst_y             = vlak_rood + 10
+
+    p4_lp_tekst_x             = vlak_x + 50
+    p4_lp_tekst_y             = vlak_rood + 10
+
+    SC_width        =   200
+    SC_height       =   300
+    SC_x            =   10
+    SC_y            =   10
 
 
-
+    sfc_width           =   200
+    sfc_height          =   300
+    sfc_x               =   400
+    sfc_y               =   300
 
     bx = bord_x
     by = bord_y
@@ -408,15 +481,7 @@ def Game():
               [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
               [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
 
-    vakjes2= [[bx+470,by+5],    [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+145],    [bx+470,by+180],
-              [bx+470,by+240],  [bx+470,by+295],    [bx+470,by+330],    [bx+470,by+367.5],  [bx+470,by+405],
-              [bx+470,by+470],  [bx+405,by+470],    [bx+367.5,by+470],  [bx+330,by+470],    [bx+295,by+470],
-              [bx+240,by+470],  [bx+180,by+470],    [bx+145,by+470],    [bx+105,by+470],    [bx+67.5,by+470],
-              [bx+5,by+470],    [bx+5,by+405],      [bx+5,by+367.5],    [bx+5,by+330],      [bx+5,by+295],
-              [bx+5,by+240],    [bx+5,by+180],      [bx+5,by+145],      [bx+5,by+105],      [bx+5,by+67.5],
-              [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
-              [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
-
+    vakjes2 = list(vakjes)
 
     scherm      = Scherm        (screen_width, screen_height)
     achtergrond = Achtergrond   ('Main/Game/wood.jpg',          scherm.Height,  scherm.Width,       0,            0           )
@@ -457,7 +522,14 @@ def Game():
     p4_lp       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      p4_lp_x,       p4_lp_y      )
     p4_cp       = Conditiepunten('Main/Elements/cp.png',     cp_width,   cp_height,      p4_cp_x,       p4_cp_y      )
 
-    tekst       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      tekst_x,       tekst_y     )
+    tekst       = Levenspunten  ('Main/Elements/lp.png',     lp_width,   lp_height,      p1_lp_tekst_x, p1_lp_tekst_y  )
+
+    sk1_name    = Scorekaarten  ('Cards/SC/SCA.png',        SC_width,      SC_height,       SC_x,           SC_y  )
+    sk1_0       = Scorekaarten  ('Cards/SC/SCA.png',        SC_width,      SC_height,       SC_x,           SC_y  )
+    sk1_1       = Scorekaarten  ('Cards/SC/SCA.png',        SC_width,      SC_height,       SC_x,           SC_y  )
+    sk1_2       = Scorekaarten  ('Cards/SC/SCA.png',        SC_width,      SC_height,       SC_x,           SC_y  )
+    sk1_3       = Scorekaarten  ('Cards/SC/SCA.png',        SC_width,      SC_height,       SC_x,           SC_y  )
+    sk1_4       = Scorekaarten  ('Cards/SC/SCA.png',        SC_width,      SC_height,       SC_x,           SC_y  )
 
 
 
@@ -544,9 +616,10 @@ def Game():
     stop_button = pygame.image.load                     (stopknop.Image)
     stop_button = pygame.transform.scale(stop_button,   (stopknop.Width, stopknop.Height))
 
+
     pygame.init()
 
-    p1_lp_start         = int(10)
+    p1_lp_start         = int(100)
     font = pygame.font.Font(None, 36)
     text = font.render("LP: "+str(p1_lp_start), 1, (10, 10, 10))
 
@@ -560,8 +633,62 @@ def Game():
     p3_vak = 20
     p4_vak = 30
 
+    SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+    SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+
+
+
     while True:
-        if p1_vak >= 1:
+        if p1_vak >= 40:
+            p1_vak = p1_vak - 40
+        if p1_vak >= 1 and p1_vak <= 4:
+            print ("leeg vakje")
+            SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+            SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+        if p1_vak ==  5:
+            print ("je bent in een gevecht!!")
+            SFC1 = pygame.image.load(os.path.join('Cards/SFC/SFC1.png'))
+            SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+        if p1_vak >= 6 and p1_vak <= 14:
+            print ("leeg vakje")
+            SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+            SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+        if p1_vak == 15:
+            print ("je bent in een gevecht!!")
+            SFC2 = pygame.image.load(os.path.join('Cards/SFC/SFC2.png'))
+            SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+        if p1_vak >= 16 and p1_vak <= 24:
+            print ("leeg vakje")
+            SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+            SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+        if p1_vak == 25:
+            print ("je bent in een gevecht!!")
+            SFC3 = pygame.image.load(os.path.join('Cards/SFC/SFC3.png'))
+            SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+        if p1_vak >= 26 and p1_vak <= 34:
+            print ("leeg vakje")
+            SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+            SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+        if p1_vak == 35:
+            print ("je bent in een gevecht!!")
+            SFC4 = pygame.image.load(os.path.join('Cards/SFC/SFC4.png'))
+            SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+        if p1_vak >= 36 and p1_vak <= 40:
+            print ("leeg vakje")
+            SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+            SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+            screen.blit(SFC, (sfc_x , sfc_y ))
+
+
+        if p1_vak >= 40:
             vakjes.extend(vakjes2)
         if p2_vak >= 11:
             vakjes.extend(vakjes2)
@@ -570,17 +697,17 @@ def Game():
         if p4_vak >= 31:
             vakjes.extend(vakjes2)
 
-        pion_rood.Pos_x = vakjes[p1_vak] [0]
-        pion_rood.Pos_y = vakjes[p1_vak] [1]
+        pion_rood.Pos_x = vakjes[p1_vak] [0] or vakjes2[p1_vak] [0]
+        pion_rood.Pos_y = vakjes[p1_vak] [1] or vakjes2[p1_vak] [1]
 
-        pion_groen.Pos_x = vakjes[p2_vak] [0]
-        pion_groen.Pos_y = vakjes[p2_vak] [1]
+        pion_groen.Pos_x = vakjes[p2_vak] [0] or vakjes2[p1_vak] [0]
+        pion_groen.Pos_y = vakjes[p2_vak] [1] or vakjes2[p1_vak] [1]
 
-        pion_geel.Pos_x = vakjes[p3_vak] [0]
-        pion_geel.Pos_y = vakjes[p3_vak] [1]
+        pion_geel.Pos_x = vakjes[p3_vak] [0] or vakjes2[p1_vak] [0]
+        pion_geel.Pos_y = vakjes[p3_vak] [1] or vakjes2[p1_vak] [1]
 
-        pion_blauw.Pos_x = vakjes[p4_vak] [0]
-        pion_blauw.Pos_y = vakjes[p4_vak] [1]
+        pion_blauw.Pos_x = vakjes[p4_vak] [0] or vakjes2[p1_vak] [0]
+        pion_blauw.Pos_y = vakjes[p4_vak] [1] or vakjes2[p1_vak] [1]
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -596,9 +723,9 @@ def Game():
                         and mouseX <= dobbel_x+button_width \
                         and mouseY <= dobbel_y+button_height:
                     print("je hebt de Roll Dice knop gedrukt")
-                    p1_lp_start         = int(100)
-                    p1_lp_start = p1_lp_start + 10
-                    lp = p1_lp_start
+
+                    p1_lp_start = int(p1_lp_start) + int(10)
+                    lp = int(p1_lp_start)
                     font = pygame.font.Font(None, 36)
                     text = font.render("LP: "+str(lp), 1, (10, 10, 10))
 
@@ -711,6 +838,9 @@ def Game():
                     and event.key == pygame.K_3:
                 print("je hebt op 3 gedrukt")
 
+
+
+
         screen.blit(background,     (int(achtergrond.Pos_x),    int(achtergrond.Pos_y)))
 
         screen.blit(Game_logo,      (int(spellogo.Pos_x),       int(spellogo.Pos_y)))
@@ -745,150 +875,155 @@ def Game():
 
         screen.blit(instr_button,   (int(instructie.Pos_x),     int(instructie.Pos_y)))
         screen.blit(Rules_button,   (int(spelregels.Pos_x),     int(spelregels.Pos_y)))
-        screen.blit(Menu_button,   (int(spelmenu.Pos_x),     int(spelmenu.Pos_y)))
+        screen.blit(Menu_button,    (int(spelmenu.Pos_x),       int(spelmenu.Pos_y)))
         screen.blit(stop_button,    (int(stopknop.Pos_x),       int(stopknop.Pos_y)))
+        screen.blit(SFC,            (int(sfc_x),                int(sfc_y)))
+        screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y)))
+        screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 125)))
+        screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 250)))
+        screen.blit(text,           (int(tekst.Pos_x),          int(tekst.Pos_y+ 375)))
 
-        screen.blit(text,           (int(tekst.Pos_x),       int(tekst.Pos_y)))
+
 
         pygame.display.update()
 
 def Instructions():
-    class Achtergrond:
-        def __init__(self, image, width, height, pos_x, pos_y):
-            self.Image  =   image
-            self.Width  =   width
-            self.Height =   height
-            self.Pos_x  =   pos_x
-            self.Pos_y  =   pos_y
+        class Achtergrond:
+            def __init__(self, image, width, height, pos_x, pos_y):
+                self.Image  =   image
+                self.Width  =   width
+                self.Height =   height
+                self.Pos_x  =   pos_x
+                self.Pos_y  =   pos_y
 
-    class Scherm:
-        def __init__(self, width, height):
-            self.Width  =   width
-            self.Height =   height
+        class Scherm:
+            def __init__(self, width, height):
+                self.Width  =   width
+                self.Height =   height
 
-    class Knoppen:
-        def __init__(self, image, width, height, pos_x, pos_y):
-            self.Image  =   image
-            self.Width  =   width
-            self.Height =   height
-            self.Pos_x  =   pos_x
-            self.Pos_y  =   pos_y
-
-
-    screen_width        = 768
-    screen_height       = 1024
-
-    element_x            = 0
-    element_y            = 0
-
-    vorige_x            = 200
-    vorige_y            = 650
-
-    startmenu_x         = 400
-    startmenu_y         = 650
-
-    volgende_x          = 600
-    volgende_y          = 650
-
-    button_width        = 200
-    button_height       = 50
-
-    scherm      = Scherm                                (screen_width, screen_height)
-    screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width))
-
-    elementen   = Knoppen       ('Main/Instructions/elements.jpg',          scherm.Height,  scherm.Width,       element_x,      element_y     )
-    vorige      = Knoppen       ('Button/IM/previous.png',                  button_width,   button_height,      vorige_x,       vorige_y     )
-    startmenu   = Knoppen       ('Button/IM/mainmenu.png',                  button_width,   button_height,      startmenu_x,    startmenu_y  )
-    volgende    = Knoppen       ('Button/IM/next.png',                      button_width,   button_height,      volgende_x,     volgende_y   )
+        class Knoppen:
+            def __init__(self, image, width, height, pos_x, pos_y):
+                self.Image  =   image
+                self.Width  =   width
+                self.Height =   height
+                self.Pos_x  =   pos_x
+                self.Pos_y  =   pos_y
 
 
+        screen_width        = 768
+        screen_height       = 1024
 
-    background = pygame.image.load                              (elementen.Image)
-    background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+        element_x            = 0
+        element_y            = 0
 
-    previous_button = pygame.image.load                         (vorige.Image)
-    previous_button = pygame.transform.scale(previous_button,   (vorige.Width, vorige.Height))
+        vorige_x            = 200
+        vorige_y            = 650
 
-    gamemenu = pygame.image.load                                (startmenu.Image)
-    gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
+        startmenu_x         = 400
+        startmenu_y         = 650
 
-    second_button = pygame.image.load                           (volgende.Image)
-    second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
+        volgende_x          = 600
+        volgende_y          = 650
+
+        button_width        = 200
+        button_height       = 50
+
+        scherm      = Scherm                                (screen_width, screen_height)
+        screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width))
+
+        elementen   = Knoppen       ('Main/Instructions/elements.jpg',          scherm.Height,  scherm.Width,       element_x,      element_y     )
+        vorige      = Knoppen       ('Button/IM/previous.png',                  button_width,   button_height,      vorige_x,       vorige_y     )
+        startmenu   = Knoppen       ('Button/IM/mainmenu.png',                  button_width,   button_height,      startmenu_x,    startmenu_y  )
+        volgende    = Knoppen       ('Button/IM/next.png',                      button_width,   button_height,      volgende_x,     volgende_y   )
 
 
 
-    player_choice = 1
+        background = pygame.image.load                              (elementen.Image)
+        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                exit()
+        previous_button = pygame.image.load                         (vorige.Image)
+        previous_button = pygame.transform.scale(previous_button,   (vorige.Width, vorige.Height))
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                (mouseX, mouseY) = pygame.mouse.get_pos()
-                print ("X =",mouseX, "Y =",mouseY)
+        gamemenu = pygame.image.load                                (startmenu.Image)
+        gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
 
-                if mouseX >= vorige_x \
-                        and mouseY >= vorige_y \
-                        and mouseX <= vorige_x+button_width \
-                        and mouseY <= vorige_y+button_height:
-                    print("je hebt de Previous knop gevonden")
-                    player_choice = 1
-                    print(player_choice)
-                    if player_choice == 1:
-                        elementen   = Knoppen       ('Main/Instructions/elements.jpg',  scherm.Height,  scherm.Width,   element_x,      element_y     )
-                        background = pygame.image.load                              (elementen.Image)
-                        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
-
-                if mouseX >= startmenu_x \
-                        and mouseY >= startmenu_y \
-                        and mouseX <= startmenu_x+button_width \
-                        and mouseY <= startmenu_y+button_height:
-                    print("je hebt de Startmenu knop gevonden")
-                    Intro()
+        second_button = pygame.image.load                           (volgende.Image)
+        second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
 
 
-                if mouseX >= volgende_x \
-                        and mouseY >= volgende_y \
-                        and mouseX <= volgende_x+button_width \
-                        and mouseY <= volgende_y+button_height:
-                    print("je hebt de Next knop gevonden")
-                    player_choice = 2
-                    print(player_choice)
-                    if player_choice == 2:
-                        elementen   = Knoppen       ('Main/Instructions/controls.jpg',         scherm.Height,       scherm.Width,   element_x,      element_y     )
-                        background = pygame.image.load                              (elementen.Image)
-                        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+
+        player_choice = 1
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    exit()
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    (mouseX, mouseY) = pygame.mouse.get_pos()
+                    print ("X =",mouseX, "Y =",mouseY)
+
+                    if mouseX >= vorige_x \
+                            and mouseY >= vorige_y \
+                            and mouseX <= vorige_x+button_width \
+                            and mouseY <= vorige_y+button_height:
+                        print("je hebt de Previous knop gevonden")
+                        player_choice = 1
+                        print(player_choice)
+                        if player_choice == 1:
+                            elementen   = Knoppen       ('Main/Instructions/elements.jpg',  scherm.Height,  scherm.Width,   element_x,      element_y     )
+                            background = pygame.image.load                              (elementen.Image)
+                            background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+
+                    if mouseX >= startmenu_x \
+                            and mouseY >= startmenu_y \
+                            and mouseX <= startmenu_x+button_width \
+                            and mouseY <= startmenu_y+button_height:
+                        print("je hebt de Startmenu knop gevonden")
+                        Intro()
 
 
-            if event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_ESCAPE:
-                print("je hebt het spel afgesloten")
-                pygame.QUIT
-                quit()
+                    if mouseX >= volgende_x \
+                            and mouseY >= volgende_y \
+                            and mouseX <= volgende_x+button_width \
+                            and mouseY <= volgende_y+button_height:
+                        print("je hebt de Next knop gevonden")
+                        player_choice = 2
+                        print(player_choice)
+                        if player_choice == 2:
+                            elementen   = Knoppen       ('Main/Instructions/controls.jpg',         scherm.Height,       scherm.Width,   element_x,      element_y     )
+                            background = pygame.image.load                              (elementen.Image)
+                            background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
 
 
-            if event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_1:
-                print("je hebt op 1 gedrukt")
+                if event.type == pygame.KEYDOWN \
+                        and event.key == pygame.K_ESCAPE:
+                    print("je hebt het spel afgesloten")
+                    pygame.QUIT
+                    quit()
 
-            if event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_2:
-                print("je hebt op 2 gedrukt")
 
-            if event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_3:
-                print("je hebt op 3 gedrukt")
+                if event.type == pygame.KEYDOWN \
+                        and event.key == pygame.K_1:
+                    print("je hebt op 1 gedrukt")
 
-        screen.blit(background,         (int(elementen.Pos_x),      int(elementen.Pos_y)))
-        screen.blit(gamemenu,           (int(startmenu.Pos_x),      int(startmenu.Pos_y)))
-        if player_choice == 2:
-            screen.blit(previous_button,    (int(vorige.Pos_x),         int(vorige.Pos_y)))
-        if player_choice == 1:
-            screen.blit(second_button,      (int(volgende.Pos_x),       int(volgende.Pos_y)))
+                if event.type == pygame.KEYDOWN \
+                        and event.key == pygame.K_2:
+                    print("je hebt op 2 gedrukt")
 
-        pygame.display.update()
+                if event.type == pygame.KEYDOWN \
+                        and event.key == pygame.K_3:
+                    print("je hebt op 3 gedrukt")
+
+            screen.blit(background,         (int(elementen.Pos_x),      int(elementen.Pos_y)))
+            screen.blit(gamemenu,           (int(startmenu.Pos_x),      int(startmenu.Pos_y)))
+            if player_choice == 2:
+                screen.blit(previous_button,    (int(vorige.Pos_x),         int(vorige.Pos_y)))
+            if player_choice == 1:
+                screen.blit(second_button,      (int(volgende.Pos_x),       int(volgende.Pos_y)))
+
+            pygame.display.update()
 
 def Gamerules():
     class Achtergrond:

@@ -51,6 +51,15 @@ regels_y            = 550
 stop_x              = 50
 stop_y              = 650
 
+speler1_x           = 450
+speler1_y           = 350
+speler2_x           = 450
+speler2_y           = 450
+
+human_x             = 150
+human_y             = 250
+
+
 logo_width          = 600
 logo_height         = 200
 logo_y              = 0
@@ -72,6 +81,12 @@ startknop   = Knoppen       ('Button/SM/newgame.png',       button_width,   butt
 instructie  = Knoppen       ('Button/SM/instructions.png',  button_width,   button_height,  instr_x,    instr_y  )
 regels      = Knoppen       ('Button/SM/gamerules.png',     button_width,   button_height,  regels_x,   regels_y  )
 stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,  stop_x,     stop_y   )
+
+stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,  stop_x,     stop_y   )
+stopknop    = Knoppen       ('Button/SM/quitgame.png',      button_width,   button_height,  stop_x,     stop_y   )
+
+speler1    = Knoppen       ('Button/SM/player1.png',      button_width,   button_height,  speler1_x,     speler1_y   )
+speler2    = Knoppen       ('Button/SM/player2.png',      button_width,   button_height,  speler2_x,     speler2_y   )
 
 
 screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),DOUBLEBUF,32)
@@ -97,6 +112,11 @@ rules_button = pygame.transform.scale(rules_button, (regels.Width, regels.Height
 stop_button = pygame.image.load                     (stopknop.Image)
 stop_button = pygame.transform.scale(stop_button,   (stopknop.Width, stopknop.Height))
 
+Speler1 = pygame.image.load                         (speler1.Image)
+Speler1 = pygame.transform.scale(Speler1,            (speler1.Width, speler1.Height))
+
+Speler2 = pygame.image.load                         (speler2.Image)
+Speler2 = pygame.transform.scale(Speler2,            (speler2.Width, speler2.Height))
 
 while True:
     for event in pygame.event.get():
@@ -108,12 +128,27 @@ while True:
             (mouseX, mouseY) = pygame.mouse.get_pos()
             print ("X =",mouseX, "Y =",mouseY)
 
+
             if mouseX >= start_x \
                     and mouseY >= start_y \
                     and mouseX <= start_x+button_width \
                     and mouseY <= start_y+button_height:
                 print("je hebt de New Game knop gevonden")
-                import Game_Reuben
+
+
+
+            if mouseX >= speler1_x \
+                    and mouseY >= speler1_y \
+                    and mouseX <= speler1_x+button_width \
+                    and mouseY <= speler1_y+button_height:
+                print("je hebt de speler1 knop gevonden")
+
+
+            if mouseX >= speler2_x \
+                    and mouseY >= speler2_y \
+                    and mouseX <= speler2_x+button_width \
+                    and mouseY <= speler2_y+button_height:
+                print("je hebt de speler2 knop gevonden")
 
 
             if mouseX >= instr_x \
@@ -121,14 +156,12 @@ while True:
                     and mouseX <= instr_x+button_width \
                     and mouseY <= instr_y+button_height:
                 print("je hebt de Instructions knop gevonden")
-                import GameInstructions_Reuben
 
             if mouseX >= regels_x \
                     and mouseY >= regels_y \
                     and mouseX <= regels_x+button_width \
                     and mouseY <= regels_y+button_height:
                 print("je hebt de Game Rules knop gevonden")
-                import GameRules_Reuben
 
             if mouseX >= stop_x \
                     and mouseY >= stop_y \
@@ -163,5 +196,9 @@ while True:
     screen.blit(instr_button,   (int(instructie.Pos_x),     int(instructie.Pos_y)))
     screen.blit(rules_button,   (int(regels.Pos_x),         int(regels.Pos_y)))
     screen.blit(stop_button,    (int(stopknop.Pos_x),       int(stopknop.Pos_y)))
+
+    screen.blit(Speler1,    (int(speler1.Pos_x),       int(speler1.Pos_y)))
+    screen.blit(Speler2,    (int(speler2.Pos_x),       int(speler2.Pos_y)))
+
 
     pygame.display.update()
