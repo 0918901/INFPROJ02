@@ -161,11 +161,11 @@ def Intro():
                     players = players + 1
 
                     if players == 1:
-                        speler1    = Knoppen       ('Button/SM/pvp.png',      button_width,   button_height,  speler1_x,     speler1_y   )
+                        speler1    = Knoppen       ('Button/SM/pvsc.png',      button_width,   button_height,  speler1_x,     speler1_y   )
                         Speler1 = pygame.image.load                         (speler1.Image)
                         Speler1 = pygame.transform.scale(Speler1,            (speler1.Width, speler1.Height))
                     if players == 2:
-                        speler2    = Knoppen       ('Button/SM/pvsc.png',      button_width,   button_height,  speler2_x,     speler2_y   )
+                        speler2    = Knoppen       ('Button/SM/pvp.png',      button_width,   button_height,  speler2_x,     speler2_y   )
                         Speler2 = pygame.image.load                         (speler2.Image)
                         Speler2 = pygame.transform.scale(Speler2,            (speler2.Width, speler2.Height))
 
@@ -784,6 +784,8 @@ def Game():
             SFC1 = pygame.image.load(os.path.join('Cards/SFC/SFC1.png'))
             SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
             screen.blit(SFC, (sfc_x , sfc_y ))
+            game_status = str("Druk op de fight knop om te vechten")
+
         if p1_vak >= 6 and p1_vak <= 14:
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
             SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
@@ -808,6 +810,8 @@ def Game():
             SFC2 = pygame.image.load(os.path.join('Cards/SFC/SFC2.png'))
             SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
             screen.blit(SFC, (sfc_x , sfc_y ))
+            game_status = str("Druk op de fight knop om te vechten")
+
         if p1_vak >= 16 and p1_vak <= 24:
 
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
@@ -833,6 +837,7 @@ def Game():
             SFC3 = pygame.image.load(os.path.join('Cards/SFC/SFC3.png'))
             SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
             screen.blit(SFC, (sfc_x , sfc_y ))
+            game_status = str("Druk op de fight knop om te vechten")
 
         if p1_vak >= 26 and p1_vak <= 34:
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
@@ -858,6 +863,7 @@ def Game():
             SFC4 = pygame.image.load(os.path.join('Cards/SFC/SFC4.png'))
             SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
             screen.blit(SFC, (sfc_x , sfc_y ))
+            game_status = str("Druk op de fight knop om te vechten")
 
         if p1_vak >= 36 and p1_vak <= 40:
             SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
@@ -1201,8 +1207,6 @@ def Game():
             if event.type == pygame.KEYDOWN \
                     and event.key == pygame.K_ESCAPE:
                 game_status = str("je hebt het spel afgesloten")
-                pygame.quit()
-                exit()
 
             if event.type == pygame.KEYDOWN \
                     and event.key == pygame.K_1:
@@ -1219,14 +1223,13 @@ def Game():
             if event.type == pygame.KEYDOWN \
                     and event.key == pygame.K_3:
                 print("je hebt op 3 gedrukt")
-                if players >= 1:
-                    players = 3
+                Loser()
+
 
             if event.type == pygame.KEYDOWN \
                     and event.key == pygame.K_4:
-                print("je hebt op 3 gedrukt")
-                if players >= 1:
-                    players = 4
+                print("je hebt op 4 gedrukt")
+                Winner()
 
 
         font = pygame.font.Font(None, 36)
@@ -1308,142 +1311,214 @@ def Game():
         pygame.display.update()
 
 def Instructions():
-        class Achtergrond:
-            def __init__(self, image, width, height, pos_x, pos_y):
-                self.Image  =   image
-                self.Width  =   width
-                self.Height =   height
-                self.Pos_x  =   pos_x
-                self.Pos_y  =   pos_y
+    class Achtergrond:
+        def __init__(self, image, width, height, pos_x, pos_y):
+            self.Image  =   image
+            self.Width  =   width
+            self.Height =   height
+            self.Pos_x  =   pos_x
+            self.Pos_y  =   pos_y
 
-        class Scherm:
-            def __init__(self, width, height):
-                self.Width  =   width
-                self.Height =   height
+    class Scherm:
+        def __init__(self, width, height):
+            self.Width  =   width
+            self.Height =   height
 
-        class Knoppen:
-            def __init__(self, image, width, height, pos_x, pos_y):
-                self.Image  =   image
-                self.Width  =   width
-                self.Height =   height
-                self.Pos_x  =   pos_x
-                self.Pos_y  =   pos_y
-
-
-        screen_width        = 768
-        screen_height       = 1024
-
-        element_x            = 0
-        element_y            = 0
-
-        vorige_x            = 200
-        vorige_y            = 650
-
-        startmenu_x         = 400
-        startmenu_y         = 650
-
-        volgende_x          = 600
-        volgende_y          = 650
-
-        button_width        = 200
-        button_height       = 50
-
-        scherm      = Scherm                                (screen_width, screen_height)
-        screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),HWSURFACE|DOUBLEBUF,32)
-
-        elementen   = Knoppen       ('Main/Instructions/elements.jpg',          scherm.Height,  scherm.Width,       element_x,      element_y     )
-        vorige      = Knoppen       ('Button/IM/previous.png',                  button_width,   button_height,      vorige_x,       vorige_y     )
-        startmenu   = Knoppen       ('Button/IM/mainmenu.png',                  button_width,   button_height,      startmenu_x,    startmenu_y  )
-        volgende    = Knoppen       ('Button/IM/next.png',                      button_width,   button_height,      volgende_x,     volgende_y   )
+    class Knoppen:
+        def __init__(self, image, width, height, pos_x, pos_y):
+            self.Image  =   image
+            self.Width  =   width
+            self.Height =   height
+            self.Pos_x  =   pos_x
+            self.Pos_y  =   pos_y
 
 
+    screen_width        = 768
+    screen_height       = 1024
 
-        background = pygame.image.load                              (elementen.Image)
-        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+    regels_x            = 0
+    regels_y            = 0
 
-        previous_button = pygame.image.load                         (vorige.Image)
-        previous_button = pygame.transform.scale(previous_button,   (vorige.Width, vorige.Height))
+    vorige_x            = 200
+    vorige_y            = 650
 
-        gamemenu = pygame.image.load                                (startmenu.Image)
-        gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
+    startmenu_x         = 400
+    startmenu_y         = 650
 
-        second_button = pygame.image.load                           (volgende.Image)
-        second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
+    volgende_x          = 600
+    volgende_y          = 650
+
+    button_width        = 200
+    button_height       = 50
+
+
+    scherm      = Scherm        (screen_width, screen_height)
+    screen = pygame.display.set_mode                    ((scherm.Height, scherm.Width),HWSURFACE|DOUBLEBUF,32)
+
+    spelregels1 = Knoppen       ('Main/Instructions/elements.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
+    vorige      = Knoppen       ('Button/IM/previous.png', button_width,   button_height,       vorige_x,    vorige_y     )
+    startmenu   = Knoppen       ('Button/IM/mainmenu.png', button_width,   button_height,       startmenu_x, startmenu_y  )
+    volgende    = Knoppen       ('Button/IM/next.png',     button_width,   button_height,       volgende_x,  volgende_y   )
 
 
 
-        player_choice = 1
+    background = pygame.image.load                              (spelregels1.Image)
+    background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
 
-        while True:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    exit()
+    previous_button = pygame.image.load                         (vorige.Image)
+    previous_button = pygame.transform.scale(previous_button,   (vorige.Width, vorige.Height))
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    (mouseX, mouseY) = pygame.mouse.get_pos()
-                    print ("X =",mouseX, "Y =",mouseY)
+    gamemenu = pygame.image.load                                (startmenu.Image)
+    gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
 
-                    if mouseX >= vorige_x \
-                            and mouseY >= vorige_y \
-                            and mouseX <= vorige_x+button_width \
-                            and mouseY <= vorige_y+button_height:
-                        print("je hebt de Previous knop gevonden")
-                        player_choice = 1
-                        print(player_choice)
-                        if player_choice == 1:
-                            elementen   = Knoppen       ('Main/Instructions/elements.jpg',  scherm.Height,  scherm.Width,   element_x,      element_y     )
-                            background = pygame.image.load                              (elementen.Image)
-                            background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
-
-                    if mouseX >= startmenu_x \
-                            and mouseY >= startmenu_y \
-                            and mouseX <= startmenu_x+button_width \
-                            and mouseY <= startmenu_y+button_height:
-                        print("je hebt de Startmenu knop gevonden")
-                        Intro()
+    second_button = pygame.image.load                           (volgende.Image)
+    second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
 
 
-                    if mouseX >= volgende_x \
-                            and mouseY >= volgende_y \
-                            and mouseX <= volgende_x+button_width \
-                            and mouseY <= volgende_y+button_height:
-                        print("je hebt de Next knop gevonden")
-                        player_choice = 2
-                        print(player_choice)
-                        if player_choice == 2:
-                            elementen   = Knoppen       ('Main/Instructions/controls.jpg',         scherm.Height,       scherm.Width,   element_x,      element_y     )
-                            background = pygame.image.load                              (elementen.Image)
-                            background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
 
+    player_choice = 1
 
-                if event.type == pygame.KEYDOWN \
-                        and event.key == pygame.K_ESCAPE:
-                    print("je hebt het spel afgesloten")
-                    pygame.QUIT
-                    quit()
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                exit()
 
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                (mouseX, mouseY) = pygame.mouse.get_pos()
+                print ("X =",mouseX, "Y =",mouseY)
 
-                if event.type == pygame.KEYDOWN \
-                        and event.key == pygame.K_1:
-                    print("je hebt op 1 gedrukt")
+                if mouseX >= vorige_x \
+                        and mouseY >= vorige_y \
+                        and mouseX <= vorige_x+button_width \
+                        and mouseY <= vorige_y+button_height:
+                    print("je hebt de Previous knop gevonden")
+                    player_choice = player_choice - 1
+                    print(player_choice)
+                    if player_choice == 1:
+                        spelregels1 = Knoppen       ('Main/Instructions/elements.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
+                        startmenu   = Knoppen       ('Button/IM/mainmenu.png', button_width,   button_height,       startmenu_x, startmenu_y  )
+                        volgende    = Knoppen       ('Button/IM/next.png',     button_width,   button_height,       volgende_x,  volgende_y   )
 
-                if event.type == pygame.KEYDOWN \
-                        and event.key == pygame.K_2:
-                    print("je hebt op 2 gedrukt")
+                        background = pygame.image.load                              (spelregels1.Image)
+                        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+                        gamemenu = pygame.image.load                                (startmenu.Image)
+                        gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
+                        second_button = pygame.image.load                           (volgende.Image)
+                        second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
 
-                if event.type == pygame.KEYDOWN \
-                        and event.key == pygame.K_3:
-                    print("je hebt op 3 gedrukt")
+                    elif player_choice == 2:
+                        spelregels1 = Knoppen       ('Main/Instructions/buttons1.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
+                        vorige      = Knoppen       ('Button/IM/previous.png', button_width,   button_height,       vorige_x,    vorige_y     )
+                        startmenu   = Knoppen       ('Button/IM/mainmenu.png', button_width,   button_height,       startmenu_x, startmenu_y  )
+                        volgende    = Knoppen       ('Button/IM/next.png',     button_width,   button_height,       volgende_x,  volgende_y   )
 
-            screen.blit(background,         (int(elementen.Pos_x),      int(elementen.Pos_y)))
-            screen.blit(gamemenu,           (int(startmenu.Pos_x),      int(startmenu.Pos_y)))
-            if player_choice == 2:
-                screen.blit(previous_button,    (int(vorige.Pos_x),         int(vorige.Pos_y)))
-            if player_choice == 1:
-                screen.blit(second_button,      (int(volgende.Pos_x),       int(volgende.Pos_y)))
+                        background = pygame.image.load                              (spelregels1.Image)
+                        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+                        previous_button = pygame.image.load                         (vorige.Image)
+                        previous_button = pygame.transform.scale(previous_button,   (vorige.Width, vorige.Height))
+                        gamemenu = pygame.image.load                                (startmenu.Image)
+                        gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
+                        second_button = pygame.image.load                           (volgende.Image)
+                        second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
 
-            pygame.display.update()
+                    elif player_choice == 3:
+                        spelregels1 = Knoppen       ('Main/Instructions/buttons2.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
+                        vorige      = Knoppen       ('Button/IM/previous.png', button_width,   button_height,       vorige_x,    vorige_y     )
+                        startmenu   = Knoppen       ('Button/IM/mainmenu.png', button_width,   button_height,       startmenu_x, startmenu_y  )
+                        volgende    = Knoppen       ('Button/IM/next.png',     button_width,   button_height,       volgende_x,  volgende_y   )
+
+                        background = pygame.image.load                              (spelregels1.Image)
+                        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+                        previous_button = pygame.image.load                         (vorige.Image)
+                        previous_button = pygame.transform.scale(previous_button,   (vorige.Width, vorige.Height))
+                        gamemenu = pygame.image.load                                (startmenu.Image)
+                        gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
+                        second_button = pygame.image.load                           (volgende.Image)
+                        second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
+
+                if mouseX >= startmenu_x \
+                        and mouseY >= startmenu_y \
+                        and mouseX <= startmenu_x+button_width \
+                        and mouseY <= startmenu_y+button_height:
+                    print("je hebt de Startmenu knop gevonden")
+                    Game()
+
+                if mouseX >= volgende_x \
+                        and mouseY >= volgende_y \
+                        and mouseX <= volgende_x+button_width \
+                        and mouseY <= volgende_y+button_height:
+                    print("je hebt de Next knop gevonden")
+                    player_choice = player_choice + 1
+                    print(player_choice)
+                    if player_choice == 1:
+                        spelregels1 = Knoppen       ('Main/Instructions/elements.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
+                        startmenu   = Knoppen       ('Button/IM/mainmenu.png', button_width,   button_height,       startmenu_x, startmenu_y  )
+                        volgende    = Knoppen       ('Button/IM/next.png',     button_width,   button_height,       volgende_x,  volgende_y   )
+
+                        background = pygame.image.load                              (spelregels1.Image)
+                        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+                        gamemenu = pygame.image.load                                (startmenu.Image)
+                        gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
+                        second_button = pygame.image.load                           (volgende.Image)
+                        second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
+
+                    elif player_choice == 2:
+                        spelregels1 = Knoppen       ('Main/Instructions/buttons1.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
+                        vorige      = Knoppen       ('Button/IM/previous.png', button_width,   button_height,       vorige_x,    vorige_y     )
+                        startmenu   = Knoppen       ('Button/IM/mainmenu.png', button_width,   button_height,       startmenu_x, startmenu_y  )
+                        volgende    = Knoppen       ('Button/IM/next.png',     button_width,   button_height,       volgende_x,  volgende_y   )
+
+                        background = pygame.image.load                              (spelregels1.Image)
+                        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+                        previous_button = pygame.image.load                         (vorige.Image)
+                        previous_button = pygame.transform.scale(previous_button,   (vorige.Width, vorige.Height))
+                        gamemenu = pygame.image.load                                (startmenu.Image)
+                        gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
+                        second_button = pygame.image.load                           (volgende.Image)
+                        second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
+
+                    elif player_choice == 3:
+                        spelregels1 = Knoppen       ('Main/Instructions/buttons2.jpg',   scherm.Height,  scherm.Width,        regels_x,    regels_y     )
+                        vorige      = Knoppen       ('Button/IM/previous.png', button_width,   button_height,       vorige_x,    vorige_y     )
+                        startmenu   = Knoppen       ('Button/IM/mainmenu.png', button_width,   button_height,       startmenu_x, startmenu_y  )
+                        volgende    = Knoppen       ('Button/IM/next.png',     button_width,   button_height,       volgende_x,  volgende_y   )
+
+                        background = pygame.image.load                              (spelregels1.Image)
+                        background = pygame.transform.scale(background,             (scherm.Height, scherm.Width))
+                        previous_button = pygame.image.load                         (vorige.Image)
+                        previous_button = pygame.transform.scale(previous_button,   (vorige.Width, vorige.Height))
+                        gamemenu = pygame.image.load                                (startmenu.Image)
+                        gamemenu = pygame.transform.scale(gamemenu,                 (startmenu.Width, startmenu.Height))
+                        second_button = pygame.image.load                           (volgende.Image)
+                        second_button = pygame.transform.scale(second_button,       (volgende.Width, volgende.Height))
+
+            if event.type == pygame.KEYDOWN \
+                    and event.key == pygame.K_ESCAPE:
+                print("je hebt het spel afgesloten")
+                pygame.quit()
+                exit()
+
+            if event.type == pygame.KEYDOWN \
+                    and event.key == pygame.K_1:
+                print("je hebt op 1 gedrukt")
+
+            if event.type == pygame.KEYDOWN \
+                    and event.key == pygame.K_2:
+                print("je hebt op 2 gedrukt")
+
+            if event.type == pygame.KEYDOWN \
+                    and event.key == pygame.K_3:
+                print("je hebt op 3 gedrukt")
+
+        screen.blit(background,         (int(spelregels1.Pos_x),    int(spelregels1.Pos_y)))
+        screen.blit(gamemenu,           (int(startmenu.Pos_x),      int(startmenu.Pos_y)))
+        if player_choice == 2 or player_choice == 3:
+            screen.blit(previous_button,    (int(vorige.Pos_x),         int(vorige.Pos_y)))
+        if player_choice == 1 or player_choice == 2:
+            screen.blit(second_button,      (int(volgende.Pos_x),       int(volgende.Pos_y)))
+
+        pygame.display.update()
 
 def Gamerules():
     class Achtergrond:
@@ -1592,7 +1667,7 @@ def Gamerules():
                         and mouseX <= startmenu_x+button_width \
                         and mouseY <= startmenu_y+button_height:
                     print("je hebt de Startmenu knop gevonden")
-                    Intro()
+                    Game()
 
                 if mouseX >= volgende_x \
                         and mouseY >= volgende_y \
@@ -1684,9 +1759,6 @@ def Gamerules():
 
 def Winner():
     pygame.init()
-
-    screen = pygame.display.set_mode((800,800))
-
     pygame.display.set_caption("Animation")
     terugNaarMenu               = 'Main/instructions/Kruis2.png'
     tryAgain_knop               = 'Main/Game/winKnop.png'
@@ -1720,9 +1792,9 @@ def Winner():
     tryy = pygame.transform.scale(tryy, (tryKnopje_width , try_height))
 
 
-    w1 = pygame.image.load("Main/Game/winSituatieBlauw.png")
+    w1 = pygame.image.load("Main/Game/winSituatieBlauw2.png")
     w1 = pygame.transform.scale(w1, (1024, 728))
-    w2 = pygame.image.load("Main/Game/winSituatieRed.png")
+    w2 = pygame.image.load("Main/Game/winSituatieRed2.png")
     w2 = pygame.transform.scale(w2, (1024, 728))
 
 
@@ -1746,7 +1818,6 @@ def Winner():
         if (winnerCurrentImage==1):
 
             screen.blit(w1, (0,0))
-            screen.blit(terug_knop,(tk_x,tk_y))
             screen.blit(tryy,(try_x,try_y))
             if event.type == pygame.MOUSEBUTTONDOWN:
                 (mouseX, mouseY) = pygame.mouse.get_pos()
@@ -1761,7 +1832,6 @@ def Winner():
         if (winnerCurrentImage==2):
 
             screen.blit(w2, (0,0))
-            screen.blit(terug_knop,(tk_x,tk_y))
             screen.blit(tryy,(try_x,try_y))
             if event.type == pygame.MOUSEBUTTONDOWN:
                 (mouseX, mouseY) = pygame.mouse.get_pos()
@@ -1776,8 +1846,6 @@ def Winner():
         if (winnerCurrentImage==2):
 
             winnerCurrentImage=1
-
-            screen.blit(terug_knop,(tk_x,tk_y))
             screen.blit(tryy,(try_x,try_y))
             if event.type == pygame.MOUSEBUTTONDOWN:
                 (mouseX, mouseY) = pygame.mouse.get_pos()
@@ -1875,6 +1943,5 @@ def Loser():
         clock.tick(5)
 
     pygame.quit()
-
 
 Intro()
