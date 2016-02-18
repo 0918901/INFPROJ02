@@ -26,6 +26,7 @@ pygame.display.set_caption('A bit Racey')
 clock = pygame.time.Clock()
 
 carImg = pygame.image.load('Player/Faces/S1.png')
+p1=pygame.image.load('Main/Game/wood.jpg')
 #gameIcon = pygame.image.load('carIcon.png')
 
 #pygame.display.set_icon(gameIcon)
@@ -63,6 +64,8 @@ def text_objects(text, font):
 
 
 def crash():
+    pygame.mixer.music.load('Monopoly - NES - Auction.mp3')
+    pygame.mixer.music.stop()
     largeText = pygame.font.SysFont("comicsansms",110)
     TextSurf, TextRect = text_objects("You Crashed", largeText)
     TextRect.center = ((display_width/2),(display_height/2))

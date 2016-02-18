@@ -50,7 +50,7 @@ BG = pygame.image.load(bs).convert()
 screen.blit(BG, (0, 0))
 
 
-winnerCurrentImage = 1
+winnerCurrentImage = 2
 
 gameLoop=True
 while gameLoop:

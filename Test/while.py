@@ -35,4 +35,4 @@ while True:
             #sluit de pygame
             exit()
 
-    screen.blit(SFC, (sfc_x , sfc_y ))
+    screen.blit(card, (sfc_x , sfc_y ))

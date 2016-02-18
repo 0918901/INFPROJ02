@@ -1,16 +1,19 @@
 import pygame
 import random
+import os
 from pygame.locals import *
 from sys import exit
 
-# opstarten van pygame
+# pygame initialiseren( deze heb je nodig bijj hte begin van deze pygame
 pygame.init()
 pygame.display.set_caption('Survival game')
+
 # afbeeldingen locaties aangeven
 bg = 'Main/Game/wood.jpg'
 board = 'Main/Game/board.png'
 lp = 'Button/GM/levenspunten.png'
 cp = 'Button/GM/conditiepunten.png'
+
 #dobbelsteen
 ds = 'Main/Dice/D1.png'
 ds2 = 'Main/Dice/D2.png'
@@ -22,15 +25,28 @@ ds6 = 'Main/Dice/D6.png'
 sf = 'Cards/SFC/SFC1.jpg'
 score = 'Cards/SC/SC1.jpg'
 speler = 'Player/Faces/S1.png'
+
+#Pionnen
 pion1 = 'Player/Piece/Rood.png'
+pion2 = 'Player/Piece/Blauw.png'
+pion3 = 'Player/Piece/Groen.png'
+pion4 = 'Player/Piece/Geel.png'
+
+#stop knop
 quit = 'Button/GM/Kruis.png'
+
+#help knop
 help1 = 'Button/GM/help.png'
+
+#roll knop
 roll = 'Button/GM/knop_roll.png'
+
+#kies knop
 knop1 = 'Button/GM/kies_1.png'
 knop2 = 'Button/GM/kies_2.png'
 knop3 = 'Button/GM/kies_3.png'
 
-
+#kaarten
 SFCA  = 'Cards/SFC/SFCA.png'
 SFC1  = 'Cards/SFC/SFC1.png'
 SFC2  = 'Cards/SFC/SFC2.png'
@@ -51,10 +67,19 @@ SFC16  = 'Cards/SFC/SFC16.png'
 SFC17  = 'Cards/SFC/SFC17.png'
 SFC18  = 'Cards/SFC/SFC18.png'
 
+#geluid aan
 sound='Button/GM/Sound.png'
+
+#geluid uit
 soundOff='Button/GM/Sound_off.png'
+
+#logo
+logo ='Main/Logo2.png'
+
+#verversingsnelheid van het scherm
 clock = pygame.time.Clock()
 
+#afmetingen
 #knop afsluiten
 close_width         =   40
 close_height        =   40
@@ -108,11 +133,14 @@ knop3_y         =       650
 roodPion_width      =    25
 roodPion_height     =    25
 
+blauw_width         =    25
+blauw_height        =    25
+
 #sfc kaart formaten
-sfc_height          =   300
-sfc_width           =   200
-sfc_x               =   550
-sfc_y               =   20
+sfc_height          =   280
+sfc_width           =   180
+sfc_x               =   180
+sfc_y               =   210
 
 #score formaten
 score_height    =   300
@@ -144,20 +172,36 @@ soundOff_height =  40
 soundOff_x     =   850
 soundOff_y     =   15
 
+#logo formaten
+logo_width =    300
+logo_height =   100
+logo_x       =  100
+logo_y       =  650
+
+#logo
+Logo= pygame.image.load(logo)
+Logo = pygame.transform.scale(Logo,(logo_width,logo_height))
+
+#geluid uit
 SoundOff=pygame.image.load(soundOff)
 SoundOff = pygame.transform.scale(SoundOff,(soundOff_width,soundOff_height))
+
 #geluid
 Sound=pygame.image.load(sound)
 Sound = pygame.transform.scale(Sound,(sound_width,sound_height))
-#kies 1
+
+
 #rode pion
 red_Pion = pygame.image.load(pion1)
 red_Pion = pygame.transform.scale(red_Pion, (roodPion_width, roodPion_height))
 
+#blauw pion
+Blauw_Pion = pygame.image.load(pion2)
+Blauw_Pion = pygame.transform.scale(Blauw_Pion,(blauw_width,blauw_height))
 
 # grootte van het scherm aangeven
 screen = pygame.display.set_mode((1024, 768))
-BG = pygame.image.load(bg).convert()
+BG = pygame.image.load(bg)
 # achtergrondkleur
 # screen.fill((80, 200, 250))
 
@@ -223,16 +267,19 @@ Knop3 = pygame.transform.scale(Knop3, (knop3_height, knop3_width))
 D1 = pygame.image.load(ds)
 D = pygame.transform.scale(D1, (dice_width, dice_height))
 
+Pion3 = pygame.image.load(pion3)
+Pion3 = pygame.transform.scale(Pion3, (40,40))
 #LP
 font = pygame.font.SysFont("Arial Black", 20)
 text = font.render("Speler 1 LP:", True, (0, 0, 0))
 #CP
-font2 = pygame.font.SysFont('Brushstrike', 20)
-text2 = font.render("CP:15", True, (0, 0, 0))
+font2 = pygame.font.SysFont('Arial Black', 20)
+text2 = font2.render("CP:15", True, (0, 0, 0))
 
 bx=20
 by=100
-
+pygame.mixer.music.load('Monopoly - NES - Auction.mp3')
+pygame.mixer.music.play()
 # Coördinaten vakken
 vakjes = [[bx+470,by+10],   [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+145],    [bx+470,by+180],
           [bx+470,by+240],  [bx+470,by+295],    [bx+470,by+330],    [bx+470,by+367.5],  [bx+470,by+405],
@@ -243,39 +290,152 @@ vakjes = [[bx+470,by+10],   [bx+470,by+67.5],   [bx+470,by+105],    [bx+470,by+1
           [bx+5,by+5],      [bx+67.5,by+5],     [bx+105,by+5],      [bx+145,by+5],      [bx+180,by+5],
           [bx+240,by+5],    [bx+295,by+5],      [bx+330,by+5],      [bx+367.5,by+5],    [bx+405.5,by+5]]
 
+vakjes2 = list(vakjes)
+
 # pion positie
 # pion positie
 vak = 0
-print(vakjes[vak] [0], vakjes [vak] [1])
+p2_vak = 10
+p3_vak = 20
+p4_vak = 30
 
-roodPion_x = vakjes[vak] [0]
-roodPion_y = vakjes[vak] [1]
-pygame.mixer.music.load('Monopoly - NES - Auction.mp3')
-pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
-pygame.mixer.music.play()
+SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+
+
+
 while True:
-    # ophalen van pygame event
+    if vak >= 40:
+        vak = vak - 40
+    if vak >= 1 and vak <= 4:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if vak ==  5:
+        print ("je bent in een gevecht!!")
+        SFC1 = pygame.image.load(os.path.join('Cards/SFC/SFC1.png'))
+        SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if vak >= 6 and vak <= 14:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if vak == 15:
+        print ("je bent in een gevecht!!")
+        SFC2 = pygame.image.load(os.path.join('Cards/SFC/SFC2.png'))
+        SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if vak >= 16 and vak <= 24:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if vak == 25:
+        print ("je bent in een gevecht!!")
+        SFC3 = pygame.image.load(os.path.join('Cards/SFC/SFC3.png'))
+        SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if vak >= 26 and vak <= 34:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if vak == 35:
+        print ("je bent in een gevecht!!")
+        SFC4 = pygame.image.load(os.path.join('Cards/SFC/SFC4.png'))
+        SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+    if vak >= 36 and vak <= 40:
+        print ("leeg vakje")
+        SFCA = pygame.image.load(os.path.join('Cards/SFC/SFCA.png'))
+        SFC = pygame.transform.scale(SFCA, (sfc_width, sfc_height))
+        screen.blit(SFC, (sfc_x , sfc_y ))
+
+
+    if vak >= 40:
+        vakjes.extend(vakjes2)
+    if p2_vak >= 11:
+        vakjes.extend(vakjes2)
+    if p3_vak >= 21:
+        vakjes.extend(vakjes2)
+    if p4_vak >= 31:
+        vakjes.extend(vakjes2)
+
+    roodPion_x = vakjes[vak] [0] or vakjes2[vak] [0]
+    roodPion_y = vakjes[vak] [1] or vakjes2[vak] [1]
+
+    blauw_x = vakjes[p2_vak] [0] or vakjes2[vak] [0]
+    blauw_y = vakjes[p2_vak] [1] or vakjes2[vak] [1]
+    #kruisje is aan
     for event in pygame.event.get():
-        # anders stop de pygame
         if event.type == QUIT:
-            # detect sluitknop
             pygame.quit()
-            # sluit de pygame
             exit()
 
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            print("je hebt het spel afgesloten")
+            pygame.QUIT
+            quit()
 
-
-
-        #knop voor dobbelsteen
         if event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
+            print ("X =",mouseX, "Y =",mouseY)
+
+            if mouseX >= button_x and mouseY >= button_y and mouseX <= button_x+button_width and mouseY <= button_y+button_height:
+                print("je hebt de Roll Dice knop gedrukt")
+
+                font3 = pygame.font.Font(None, 36)
+                text = font3.render("LP: "+str(lp), 1, (10, 10, 10))
+
+                dice_choice = random.randint(1, 6)
+                vak = vak + dice_choice
+                p2_vak = p2_vak + dice_choice
+                p3_vak = p3_vak + dice_choice
+                p4_vak = p4_vak + dice_choice
+
+                if dice_choice == 1:
+                    D1 = pygame.image.load(ds)
+                    D = pygame.transform.scale(D1, (dice_width, dice_height))
+                    print ("je hebt 1 gegooid")
+
+
+                if dice_choice == 2:
+                    D2 = pygame.image.load(ds2)
+                    D = pygame.transform.scale(D2, (dice_width, dice_height))
+                    print ("je hebt 2 gegooid")
+
+
+                if dice_choice == 3:
+                    D3 = pygame.image.load(ds3)
+                    D = pygame.transform.scale(D3, (dice_width, dice_height))
+                    print ("je hebt 2 gegooid")
+
+                if dice_choice == 4:
+                    D4 = pygame.image.load(ds4)
+                    D = pygame.transform.scale(D4, (dice_width, dice_height))
+
+                    print ("je hebt 2 gegooid")
+
+                if dice_choice == 5:
+                    D5 = pygame.image.load(ds5)
+                    D = pygame.transform.scale(D5, (dice_width, dice_height))
+                    print ("je hebt 2 gegooid")
+
+                if dice_choice== 6:
+                    D2 = pygame.image.load(ds6)
+                    D = pygame.transform.scale(D2, (dice_width, dice_height))
+                    print ("je hebt 2 gegooid")
+
+
             if mouseX >= hulp_x and mouseY>= hulp_y  and mouseX<=(hulp_x+hulp_width) and mouseY<= (hulp_y+hulp_height):
                 print("je hebt de instruction knop gevonden")
                 import GameInstructions_Reuben
 
             if mouseX >=close_x and mouseY>= close_y and mouseX<=(close_x+close_width) and mouseY<= (close_y+close_height):
                 print("je hebt de stop knop gevonden")
-                import GameStartMenu_Reuben
+
 
             if mouseX >=sound_x and mouseY>= sound_y and mouseX<=(sound_x+sound_width) and mouseY<= (sound_y+sound_height):
                 geluid = random.randint(1,2)
@@ -290,64 +450,11 @@ while True:
 
 
 
-            if mouseX >=button_x and mouseY>= button_y and mouseX<=(button_x+100) and mouseY<= (button_y+100):
-                print("je hebt de roll knop gevonden")
-                player1_choice = random.randint(1,6)
-
-                vak = vak + player1_choice
-                roodPion_x = vakjes[vak] [0]
-                roodPion_y = vakjes[vak] [1]
-
-
-                if vakjes ==  [7] or vakjes == [16]:
-                    SFC1 = pygame.image.load(SFC1)
-                    SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
-
-                if player1_choice == 1:
-                    D1 = pygame.image.load(ds)
-                    D = pygame.transform.scale(D1, (dice_width, dice_height))
-                    #SFC1 = pygame.image.load(SFC1)
-                    #SFC = pygame.transform.scale(SFC1, (sfc_width, sfc_height))
-                    print ("je hebt 1 gegooid")
-
-                elif player1_choice == 2:
-                    D2 = pygame.image.load(ds2)
-                    D = pygame.transform.scale(D2, (dice_width, dice_height))
-                    #SFC2 = pygame.image.load(SFC2)
-                    #SFC = pygame.transform.scale(SFC2, (sfc_width, sfc_height))
-                    print ("je hebt 2 gegooid")
-
-                elif player1_choice == 3:
-                    D3 = pygame.image.load(ds3)
-                    D = pygame.transform.scale(D3, (dice_width, dice_height))
-                    #SFC3 = pygame.image.load(SFC3)
-                    #SFC = pygame.transform.scale(SFC3, (sfc_width, sfc_height))
-                    print ("je hebt 3 gegooid")
-
-                elif player1_choice == 4:
-                    D4 = pygame.image.load(ds4)
-                    D = pygame.transform.scale(D4, (dice_width, dice_height))
-                    #SFC4 = pygame.image.load(SFC4)
-                    #SFC = pygame.transform.scale(SFC4, (sfc_width, sfc_height))
-                    print ("je hebt 4 gegooid")
-
-                elif player1_choice == 5:
-                    D5 = pygame.image.load(ds5)
-                    D = pygame.transform.scale(D5, (dice_width, dice_height))
-                    #SFC5 = pygame.image.load(SFC5)
-                    #SFC = pygame.transform.scale(SFC5, (sfc_width, sfc_height))
-                    print ("je hebt 5 gegooid")
-
-                elif player1_choice == 6:
-                    D6 = pygame.image.load(ds6)
-                    D = pygame.transform.scale(D6, (dice_width, dice_height))
-                    #SFC6 = pygame.image.load(SFC6)
-                    #SFC = pygame.transform.scale(SFC6, (sfc_width, sfc_height))
-                    print ("je hebt 6 gegooid")
 
 
     # locaties op het spelbord
     screen.blit(BG, (0, 0))
+
     #screen.blit(lifepoints, (20, 15))
     screen.blit(gameboard, (bx, by))
     #screen.blit(CP, (300, 15))
@@ -363,6 +470,9 @@ while True:
     screen.blit(Knop1, (knop1_x, knop1_y))
     screen.blit(Knop2, (knop2_x, knop2_y))
     screen.blit(Knop3, (knop3_x, knop3_y))
+    screen.blit(Logo,(logo_x, logo_y))
+    screen.blit(Blauw_Pion,(blauw_x, blauw_y))
+    #screen.blit(Pion3,(Pion3_x, Pion3_y))
 
     screen.blit(text,
     (110 - text.get_width() // 2, 40 - text.get_height() // 2))
@@ -373,7 +483,9 @@ while True:
 
     # Scherm vernieuwen bij verandering
     pygame.display.update()
+    #zet de limite
     clock.tick(60)
 
+#Afsluiten
 pygame.quit()
 quit()
