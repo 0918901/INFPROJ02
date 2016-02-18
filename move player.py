@@ -8,14 +8,16 @@ RED = (255, 0, 0)
 
 display_width = 800
 display_height = 600
-
+bg_width=100
+bg_height=100
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('speler')
 black = (0,0,0)
 white = (50,255,255)
 #foto laden
-carImg = pygame.image.load('Player/Piece/Blauw.png')
-carImg= pygame.transform.scale(carImg, (100, 100))
+
+carImg = pygame.image.load("m1.png")
+
 def car(x,y):
     gameDisplay.blit(carImg, (x,y))
 
@@ -23,7 +25,6 @@ def car(x,y):
 
 pygame.display.update()
 # Loop until the user clicks the close button.
-
 done = False
 
 # Used to manage how fast the screen updates
@@ -52,7 +53,6 @@ while not done:
             # adjust speed.
             if event.key == pygame.K_LEFT:
                 x_speed = -3
-
             elif event.key == pygame.K_RIGHT:
                 x_speed = 3
             elif event.key == pygame.K_UP:
@@ -64,9 +64,9 @@ while not done:
         elif event.type == pygame.KEYUP:
             # If it is an arrow key, reset vector back to zero
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                x_speed = 0
+                x_speed = 1
             elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                y_speed = 0
+                y_speed = 1
 
     # --- Game Logic
     pygame.mouse.set_visible(0)
@@ -78,7 +78,8 @@ while not done:
 
     # First, clear the screen to WHITE. Don't put other drawing commands
     # above this, or they will be erased with this command.
-    gameDisplay.fill(GREEN)
+    gameDisplay.fill(RED)
+    #gameDisplay.blit(BG, (0, 0))
     car(x_coord,y_coord)
 
 
@@ -87,6 +88,6 @@ while not done:
 
     # Limit frames per second
     clock.tick(60)
-
+message_display
 # Close the window and quit.
 pygame.quit()
