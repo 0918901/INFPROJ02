@@ -1206,7 +1206,8 @@ def Game():
 
             if event.type == pygame.KEYDOWN \
                     and event.key == pygame.K_ESCAPE:
-                game_status = str("je hebt het spel afgesloten")
+                Pauze()
+                game_status = str("je hebt het spel gepauzeerd")
 
             if event.type == pygame.KEYDOWN \
                     and event.key == pygame.K_1:
@@ -1943,5 +1944,118 @@ def Loser():
         clock.tick(5)
 
     pygame.quit()
+
+def Pauze():
+    pygame.init()
+    display_width = 1024
+    display_height = 768
+
+    black = (0,0,0)
+
+    red = (200,0,0)
+    green = (0,200,0)
+
+    bright_red = (255,0,0)
+    bright_green = (0,255,0)
+
+
+    gameDisplay = pygame.display.set_mode((display_width,display_height))
+    pygame.display.set_caption('A bit Racey')
+    clock = pygame.time.Clock()
+    bg = 'Main/Menu/startmenu.jpg'
+
+    pause = True
+
+    def text_objects(text, font):
+        textSurface = font.render(text, True, black)
+        return textSurface, textSurface.get_rect()
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+            button("Play Again",230,590,180,100,green,bright_green,game_loop)
+            button("Quit",650,590,180,100,red,bright_red,quitgame)
+
+            pygame.display.update()
+            clock.tick(15)
+
+    def button(msg,x,y,w,h,ic,ac,action=None):
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        if x+w > mouse[0] > x and y+h > mouse[1] > y:
+            pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
+            if click[0] == 1 and action != None:
+                action()
+        else:
+            pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
+        smallText = pygame.font.SysFont("arial",50)
+        textSurf, textRect = text_objects(msg, smallText)
+        textRect.center = ( (x+(w/2)), (y+(h/2)) )
+        gameDisplay.blit(textSurf, textRect)
+
+
+    def quitgame():
+        pygame.quit()
+        quit()
+
+    def unpause():
+        global pause
+        pause = False
+        Game()
+
+    def paused():
+        largeText = pygame.font.SysFont("arial",200)
+        TextSurf, TextRect = text_objects("Paused", largeText)
+        TextRect.center = ((display_width/2),(display_height/2))
+        gameDisplay.blit(TextSurf, TextRect)
+
+
+        while pause:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+
+
+
+        # locaties op het spelbord
+
+
+            pygame.display.update()
+            clock.tick(15)
+
+    def game_loop():
+        global pause
+
+        gameExit = False
+
+        while not gameExit:
+
+            for event in pygame.event.get():
+                BG = pygame.image.load(bg)
+                BG = pygame.transform.scale(BG,(display_width,display_height))
+                gameDisplay.blit(BG, (0, 0))
+                button("Continue",230,590,180,100,green,bright_green,unpause)
+                button("Quit",650,590,180,100,red,bright_red,quitgame)
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        pause = False
+                        paused()
+
+            pygame.display.update()
+            clock.tick(60)
+
+    game_loop()
+    pygame.quit()
+    quit()
+
 
 Intro()
